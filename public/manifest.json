@@ -1,0 +1,21 @@
+{
+  "short_name": "Vashudha Ghee",
+  "name": "Vashudha Ghee - Premium Pure Desi Ghee",
+  "description": "Premium quality pure desi ghee made from finest cow milk",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#F59E0B",
+  "background_color": "#ffffff"
+}
