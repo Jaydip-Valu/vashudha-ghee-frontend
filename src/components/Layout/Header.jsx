@@ -40,7 +40,7 @@ const Header = () => {
             <img
               src="/images/logo.svg"
               alt="Vashudha Ghee - Pure Desi Ghee"
-              className="h-10 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 

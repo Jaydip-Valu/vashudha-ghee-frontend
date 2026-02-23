@@ -109,8 +109,8 @@ const Home = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <img src="/images/logo.svg" alt="Vashudha Ghee Logo" className="h-14 w-auto" />
+              <div className="flex items-center gap-3 mb-5">
+                <img src="/images/logo.svg" alt="Vashudha Ghee Logo" className="h-16 w-auto" />
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-6">
                 Pure Desi Ghee
@@ -145,12 +145,12 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary-200 to-secondary-200 rounded-3xl opacity-30 blur-xl"></div>
+            <div className="relative flex items-center justify-center">
+              <div className="absolute -inset-6 bg-gradient-to-br from-primary-200 via-amber-200 to-secondary-200 rounded-3xl opacity-40 blur-2xl"></div>
               <img
                 src="/images/hero-ghee.svg"
-                alt="Pure Desi Ghee - Traditional Indian Ghee in Golden Jar"
-                className="relative rounded-2xl shadow-2xl w-full"
+                alt="Pure Desi Ghee - Traditional Indian Brass Ghee Matka with Spoon and Leaves"
+                className="relative rounded-3xl shadow-2xl w-full max-w-lg"
                 loading="eager"
               />
             </div>

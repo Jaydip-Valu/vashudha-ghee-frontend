@@ -1,14 +1,236 @@
-<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="640" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FEF3C7;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+    <!-- Background gradient: warm golden sunrise -->
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="45%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </radialGradient>
+    <!-- Jar body gradient: brass/golden -->
+    <linearGradient id="jarBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="18%" stop-color="#d97706"/>
+      <stop offset="40%" stop-color="#fbbf24"/>
+      <stop offset="60%" stop-color="#fcd34d"/>
+      <stop offset="80%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#92400e"/>
     </linearGradient>
+    <!-- Jar lid gradient -->
+    <linearGradient id="jarLid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#92400e"/>
+      <stop offset="30%" stop-color="#d97706"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <!-- Ghee fill gradient: rich golden liquid -->
+    <linearGradient id="gheeColor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <!-- Small jar gradient -->
+    <linearGradient id="smallJar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="25%" stop-color="#b45309"/>
+      <stop offset="55%" stop-color="#fbbf24"/>
+      <stop offset="80%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <!-- Wooden surface gradient -->
+    <linearGradient id="woodSurface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#92400e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Ghee drip gradient -->
+    <linearGradient id="dripGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.6"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Soft shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#92400e" flood-opacity="0.25"/>
+    </filter>
+    <!-- Leaf shadow -->
+    <filter id="leafShadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#166534" flood-opacity="0.25"/>
+    </filter>
   </defs>
-  <rect width="800" height="600" fill="url(#grad)"/>
-  <ellipse cx="400" cy="380" rx="200" ry="80" fill="#D97706" opacity="0.3"/>
-  <ellipse cx="400" cy="350" rx="180" ry="180" fill="#F59E0B"/>
-  <ellipse cx="400" cy="330" rx="160" ry="160" fill="#FBBF24"/>
-  <text x="400" y="200" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#92400E" text-anchor="middle">Pure Desi Ghee</text>
-  <text x="400" y="240" font-family="Arial, sans-serif" font-size="24" fill="#92400E" text-anchor="middle" opacity="0.8">Traditional & Authentic</text>
+
+  <!-- Background -->
+  <rect width="800" height="640" fill="url(#bgGrad)"/>
+
+  <!-- Decorative background circles / aura -->
+  <circle cx="400" cy="280" r="290" fill="#fef3c7" opacity="0.4"/>
+  <circle cx="400" cy="280" r="220" fill="#fde68a" opacity="0.25"/>
+  <circle cx="400" cy="280" r="150" fill="#fbbf24" opacity="0.12"/>
+
+  <!-- Bokeh dots (decorative) -->
+  <circle cx="80"  cy="90"  r="18" fill="#fde68a" opacity="0.5"/>
+  <circle cx="130" cy="60"  r="10" fill="#fbbf24" opacity="0.4"/>
+  <circle cx="680" cy="80"  r="22" fill="#fde68a" opacity="0.45"/>
+  <circle cx="740" cy="140" r="12" fill="#fbbf24" opacity="0.35"/>
+  <circle cx="55"  cy="420" r="15" fill="#fde68a" opacity="0.4"/>
+  <circle cx="750" cy="430" r="18" fill="#fde68a" opacity="0.4"/>
+
+  <!-- ─── Wooden / Slate surface ─── -->
+  <ellipse cx="400" cy="545" rx="310" ry="38" fill="url(#woodSurface)"/>
+  <ellipse cx="400" cy="540" rx="295" ry="28" fill="#92400e" opacity="0.18"/>
+  <!-- Wood grain lines -->
+  <path d="M 110 540 Q 280 535 490 542 Q 610 545 690 540" stroke="#78350f" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <path d="M 130 548 Q 300 543 490 550 Q 600 553 670 548" stroke="#78350f" stroke-width="1" fill="none" opacity="0.2"/>
+
+  <!-- ─── Large Brass Ghee Matka (Main Jar) ─── -->
+  <g filter="url(#shadow)">
+    <!-- Jar shadow -->
+    <ellipse cx="400" cy="538" rx="105" ry="18" fill="#92400e" opacity="0.3"/>
+    <!-- Jar bottom band -->
+    <rect x="318" y="495" width="164" height="30" rx="8" fill="#b45309" opacity="0.7"/>
+    <!-- Jar body -->
+    <path d="M 310 520 Q 295 420 300 340 Q 305 290 400 280 Q 495 290 500 340 Q 505 420 490 520 Z"
+          fill="url(#jarBody)"/>
+    <!-- Jar shoulder (narrowing to neck) -->
+    <path d="M 300 340 Q 310 295 345 282 Q 370 274 400 272 Q 430 274 455 282 Q 490 295 500 340 Z"
+          fill="#d97706"/>
+    <!-- Neck -->
+    <rect x="353" y="235" width="94" height="40" rx="6" fill="url(#jarLid)"/>
+    <!-- Lid rim -->
+    <ellipse cx="400" cy="235" rx="52" ry="12" fill="#f59e0b"/>
+    <ellipse cx="400" cy="233" rx="44" ry="9" fill="#fbbf24"/>
+    <!-- Lid knob -->
+    <ellipse cx="400" cy="226" rx="20" ry="7" fill="#d97706"/>
+    <ellipse cx="400" cy="222" rx="14" ry="5" fill="#f59e0b"/>
+    <circle cx="400" cy="217" r="9" fill="#b45309"/>
+    <circle cx="400" cy="215" r="6" fill="#d97706"/>
+    <!-- Jar highlight (left side) -->
+    <path d="M 320 450 Q 325 380 330 320 Q 335 295 350 285" stroke="#fde68a" stroke-width="10" fill="none" opacity="0.35" stroke-linecap="round"/>
+    <!-- Jar highlight (center) -->
+    <path d="M 390 290 Q 392 360 393 450" stroke="#fef3c7" stroke-width="5" fill="none" opacity="0.3" stroke-linecap="round"/>
+    <!-- Decorative band on jar body -->
+    <path d="M 312 430 Q 400 415 488 430" stroke="#92400e" stroke-width="3" fill="none" opacity="0.4"/>
+    <path d="M 308 380 Q 400 365 492 380" stroke="#92400e" stroke-width="2" fill="none" opacity="0.3"/>
+    <!-- Etched floral motif on jar -->
+    <circle cx="400" cy="405" r="28" fill="none" stroke="#fde68a" stroke-width="1.5" opacity="0.5"/>
+    <path d="M400 380 Q408 393 400 406 Q392 393 400 380Z" fill="#fde68a" opacity="0.3"/>
+    <path d="M376 405 Q389 397 402 405 Q389 413 376 405Z" fill="#fde68a" opacity="0.3"/>
+    <path d="M400 406 Q408 419 400 432 Q392 419 400 406Z" fill="#fde68a" opacity="0.3"/>
+    <path d="M402 405 Q415 397 428 405 Q415 413 402 405Z" fill="#fde68a" opacity="0.3"/>
+    <circle cx="400" cy="405" r="8" fill="#f59e0b" opacity="0.4"/>
+  </g>
+
+  <!-- ─── Ghee dripping from lid ─── -->
+  <path d="M 375 237 Q 370 255 368 270 Q 367 278 370 285" stroke="url(#dripGrad)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <ellipse cx="370" cy="287" rx="6" ry="8" fill="#fcd34d" opacity="0.8"/>
+  <path d="M 420 237 Q 425 260 428 275 Q 430 283 427 289" stroke="url(#dripGrad)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.75"/>
+  <ellipse cx="427" cy="291" rx="5" ry="7" fill="#fcd34d" opacity="0.7"/>
+
+  <!-- ─── Ghee pool on surface ─── -->
+  <ellipse cx="400" cy="533" rx="120" ry="12" fill="#fcd34d" opacity="0.55"/>
+  <ellipse cx="400" cy="531" rx="90" ry="8" fill="#fef3c7" opacity="0.4"/>
+
+  <!-- ─── Wooden spoon with ghee ─── -->
+  <g transform="rotate(-32, 260, 380)" filter="url(#shadow)">
+    <!-- Spoon handle -->
+    <rect x="155" y="355" width="160" height="14" rx="7" fill="#92400e"/>
+    <rect x="157" y="357" width="155" height="6" rx="3" fill="#b45309" opacity="0.6"/>
+    <!-- Spoon bowl -->
+    <ellipse cx="325" cy="362" rx="30" ry="20" fill="#b45309"/>
+    <ellipse cx="325" cy="362" rx="24" ry="15" fill="#d97706"/>
+    <!-- Ghee in spoon -->
+    <ellipse cx="325" cy="362" rx="20" ry="11" fill="#fcd34d" opacity="0.9"/>
+    <!-- Spoon highlight -->
+    <path d="M 318 355 Q 326 360 332 355" stroke="#fde68a" stroke-width="2" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- ─── Small clay pot (left) ─── -->
+  <g transform="translate(135, 370)" filter="url(#shadow)">
+    <ellipse cx="65" cy="155" rx="52" ry="10" fill="#92400e" opacity="0.25"/>
+    <path d="M 18 150 Q 10 100 18 68 Q 25 45 65 40 Q 105 45 112 68 Q 120 100 112 150 Z"
+          fill="url(#smallJar)"/>
+    <path d="M 18 68 Q 30 48 65 43 Q 100 48 112 68 Z" fill="#f59e0b"/>
+    <rect x="40" y="30" width="50" height="16" rx="5" fill="#d97706"/>
+    <ellipse cx="65" cy="30" rx="28" ry="8" fill="#f59e0b"/>
+    <ellipse cx="65" cy="27" rx="20" ry="5" fill="#fbbf24"/>
+    <!-- Highlight -->
+    <path d="M 28 130 Q 32 90 34 65" stroke="#fde68a" stroke-width="6" fill="none" opacity="0.3" stroke-linecap="round"/>
+    <!-- Label band -->
+    <path d="M 20 100 Q 65 92 110 100" stroke="#92400e" stroke-width="2" fill="none" opacity="0.45"/>
+  </g>
+
+  <!-- ─── Green leaves (tulsi / neem) ─── -->
+  <!-- Left bunch -->
+  <g filter="url(#leafShadow)">
+    <ellipse cx="155" cy="345" rx="42" ry="18" fill="#16a34a" transform="rotate(-40, 155, 345)"/>
+    <ellipse cx="140" cy="340" rx="38" ry="15" fill="#15803d" transform="rotate(-55, 140, 340)"/>
+    <ellipse cx="165" cy="355" rx="35" ry="14" fill="#22c55e" transform="rotate(-25, 165, 355)"/>
+    <!-- Leaf veins -->
+    <path d="M 130 330 Q 155 340 175 333" stroke="#166534" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M 120 340 Q 145 347 160 358" stroke="#166534" stroke-width="1" fill="none" opacity="0.4"/>
+  </g>
+  <!-- Right bunch -->
+  <g filter="url(#leafShadow)">
+    <ellipse cx="630" cy="480" rx="44" ry="17" fill="#16a34a" transform="rotate(40, 630, 480)"/>
+    <ellipse cx="648" cy="472" rx="38" ry="15" fill="#15803d" transform="rotate(55, 648, 472)"/>
+    <ellipse cx="615" cy="488" rx="36" ry="13" fill="#22c55e" transform="rotate(20, 615, 488)"/>
+    <path d="M 650 470 Q 628 478 610 488" stroke="#166534" stroke-width="1" fill="none" opacity="0.45"/>
+  </g>
+
+  <!-- ─── Wheat stalks (right side) ─── -->
+  <g opacity="0.75">
+    <path d="M 620 530 Q 615 480 618 430 Q 620 400 614 380" stroke="#d97706" stroke-width="3" fill="none"/>
+    <ellipse cx="614" cy="375" rx="7" ry="18" fill="#f59e0b" transform="rotate(-5, 614, 375)"/>
+    <ellipse cx="608" cy="385" rx="5" ry="14" fill="#fbbf24" transform="rotate(-15, 608, 385)"/>
+    <ellipse cx="620" cy="383" rx="5" ry="14" fill="#f59e0b" transform="rotate(15, 620, 383)"/>
+    <path d="M 645 530 Q 640 475 644 420 Q 646 388 640 365" stroke="#d97706" stroke-width="3" fill="none"/>
+    <ellipse cx="640" cy="360" rx="7" ry="18" fill="#f59e0b" transform="rotate(5, 640, 360)"/>
+    <ellipse cx="634" cy="370" rx="5" ry="13" fill="#fbbf24" transform="rotate(-12, 634, 370)"/>
+    <ellipse cx="647" cy="368" rx="5" ry="13" fill="#f59e0b" transform="rotate(18, 647, 368)"/>
+  </g>
+
+  <!-- ─── Stars / sparkles ─── -->
+  <g fill="#f59e0b" opacity="0.6">
+    <path d="M 185 200 L 188 208 L 196 208 L 190 213 L 192 221 L 185 216 L 178 221 L 180 213 L 174 208 L 182 208 Z"/>
+    <path d="M 608 165 L 611 173 L 619 173 L 613 178 L 615 186 L 608 181 L 601 186 L 603 178 L 597 173 L 605 173 Z"/>
+  </g>
+  <g fill="#fbbf24" opacity="0.5">
+    <path d="M 560 240 L 562 246 L 568 246 L 563 250 L 565 256 L 560 252 L 555 256 L 557 250 L 552 246 L 558 246 Z"/>
+    <path d="M 230 310 L 232 316 L 238 316 L 233 320 L 235 326 L 230 322 L 225 326 L 227 320 L 222 316 L 228 316 Z"/>
+  </g>
+
+  <!-- ─── Brand watermark text on image ─── -->
+  <text x="400" y="592" font-family="Poppins, Arial, sans-serif" font-size="15" font-weight="600"
+        fill="#92400e" text-anchor="middle" opacity="0.55" letter-spacing="3">VASHUDHA GHEE — PURE &amp; TRADITIONAL</text>
+
+  <!-- ─── "100% Pure" badge ─── -->
+  <g transform="translate(560, 135)">
+    <circle cx="0" cy="0" r="52" fill="#d97706" opacity="0.92"/>
+    <circle cx="0" cy="0" r="44" fill="#f59e0b"/>
+    <circle cx="0" cy="0" r="38" fill="none" stroke="#fde68a" stroke-width="2" stroke-dasharray="4 3"/>
+    <text x="0" y="-10" font-family="Poppins, Arial, sans-serif" font-size="11" font-weight="700"
+          fill="white" text-anchor="middle">100%</text>
+    <text x="0" y="5" font-family="Poppins, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="white" text-anchor="middle">PURE</text>
+    <text x="0" y="19" font-family="Poppins, Arial, sans-serif" font-size="8"
+          fill="#fef3c7" text-anchor="middle">DESI GHEE</text>
+  </g>
+
+  <!-- ─── "Traditional" badge (left) ─── -->
+  <g transform="translate(178, 165)">
+    <circle cx="0" cy="0" r="44" fill="#b45309" opacity="0.88"/>
+    <circle cx="0" cy="0" r="36" fill="#d97706"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#fde68a" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <text x="0" y="-8" font-family="Poppins, Arial, sans-serif" font-size="9" font-weight="700"
+          fill="white" text-anchor="middle">BILONA</text>
+    <text x="0" y="6" font-family="Poppins, Arial, sans-serif" font-size="8" font-weight="700"
+          fill="#fef3c7" text-anchor="middle">METHOD</text>
+    <text x="0" y="19" font-family="Poppins, Arial, sans-serif" font-size="7"
+          fill="#fef3c7" text-anchor="middle">TRADITIONAL</text>
+  </g>
 </svg>
+
