@@ -20,8 +20,13 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true)
-      // eslint-disable-next-line no-unused-vars
-      const { confirmPassword, ...registerData } = data
+      const { confirmPassword, terms, firstName, lastName, ...rest } = data
+      const registerData = {
+        ...rest,
+        first_name: firstName,
+        last_name: lastName,
+        password_confirmation: confirmPassword
+      }
       const response = await authService.register(registerData)
       dispatch(setCredentials({ user: response.user, token: response.token }))
       toast.success('Registration successful!')
@@ -35,7 +40,7 @@ const Register = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Register - Create New Account"
         description="Create your Vashudha Ghee account to start shopping premium pure desi ghee. Quick registration with exclusive benefits and offers."
         noindex={true}
@@ -49,18 +54,26 @@ const Register = () => {
 
           <div className="card p-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <Input
-                label="Full Name"
-                placeholder="Enter your name"
-                {...register('name', { required: 'Name is required' })}
-                error={errors.name?.message}
-              />
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  label="First Name"
+                  placeholder="Enter your first name"
+                  {...register('firstName', { required: 'First name is required' })}
+                  error={errors.firstName?.message}
+                />
+                <Input
+                  label="Last Name"
+                  placeholder="Enter your last name"
+                  {...register('lastName', { required: 'Last name is required' })}
+                  error={errors.lastName?.message}
+                />
+              </div>
 
               <Input
                 label="Email"
                 type="email"
                 placeholder="Enter your email"
-                {...register('email', { 
+                {...register('email', {
                   required: 'Email is required',
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -73,7 +86,7 @@ const Register = () => {
               <Input
                 label="Phone"
                 placeholder="Enter your phone number"
-                {...register('phone', { 
+                {...register('phone', {
                   required: 'Phone is required',
                   pattern: {
                     value: /^[6-9]\d{9}$/,
@@ -87,7 +100,7 @@ const Register = () => {
                 label="Password"
                 type="password"
                 placeholder="Create a password"
-                {...register('password', { 
+                {...register('password', {
                   required: 'Password is required',
                   minLength: {
                     value: 6,
@@ -101,7 +114,7 @@ const Register = () => {
                 label="Confirm Password"
                 type="password"
                 placeholder="Confirm your password"
-                {...register('confirmPassword', { 
+                {...register('confirmPassword', {
                   required: 'Please confirm password',
                   validate: value => value === password || 'Passwords do not match'
                 })}
@@ -109,8 +122,8 @@ const Register = () => {
               />
 
               <label className="flex items-start text-sm">
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   className="mr-2 mt-1"
                   {...register('terms', { required: 'You must accept the terms' })}
                 />

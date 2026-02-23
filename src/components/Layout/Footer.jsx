@@ -62,7 +62,7 @@ const Footer = () => {
             <h3 className="text-white text-lg font-semibold mb-4">Customer Service</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/orders" className="hover:text-primary-500 transition">
+                <Link to="/track-order" className="hover:text-primary-500 transition">
                   Track Order
                 </Link>
               </li>

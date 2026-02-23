@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { fetchUserProfile } from './authThunks'
 
 const initialState = {
   user: null,
@@ -39,6 +40,23 @@ const authSlice = createSlice({
       localStorage.setItem('user', JSON.stringify(state.user))
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserProfile.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.isAuthenticated = true
+        state.loading = false
+      })
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.error = action.payload
+        state.isAuthenticated = false
+        state.loading = false
+      })
+  }
 })
 
 export const { setCredentials, setLoading, setError, logout, updateUser } = authSlice.actions
