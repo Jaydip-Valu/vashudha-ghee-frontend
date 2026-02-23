@@ -10,6 +10,7 @@ const Header = () => {
   const navigate = useNavigate()
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const user = useSelector(selectCurrentUser)
+  console.log('User data in Header component:', user)
   const cartQuantity = useSelector(selectCartTotalQuantity)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
@@ -142,14 +143,14 @@ const Header = () => {
                   <span className="hidden lg:inline">{user?.name}</span>
                 </button>
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link 
-                    to="/profile" 
+                  <Link
+                    to="/profile"
                     className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Profile
                   </Link>
-                  <Link 
-                    to="/orders" 
+                  <Link
+                    to="/orders"
                     className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Orders
@@ -186,79 +187,79 @@ const Header = () => {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-2">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
               </Link>
-              <Link 
-                to="/products" 
+              <Link
+                to="/products"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Products
               </Link>
-              <Link 
-                to="/about" 
+              <Link
+                to="/about"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 About Us
               </Link>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contact
               </Link>
-              <Link 
-                to="/track-order" 
+              <Link
+                to="/track-order"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Track Order
               </Link>
-              <Link 
-                to="/faq" 
+              <Link
+                to="/faq"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 FAQ
               </Link>
-              <Link 
-                to="/shipping" 
+              <Link
+                to="/shipping"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Shipping Policy
               </Link>
-              <Link 
-                to="/returns" 
+              <Link
+                to="/returns"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Return Policy
               </Link>
-              <Link 
-                to="/privacy" 
+              <Link
+                to="/privacy"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Privacy Policy
               </Link>
-              <Link 
-                to="/terms" 
+              <Link
+                to="/terms"
                 className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Terms &amp; Conditions
               </Link>
               {user?.role === 'admin' && (
-                <Link 
-                  to="/admin/dashboard" 
+                <Link
+                  to="/admin/dashboard"
                   className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -266,8 +267,8 @@ const Header = () => {
                 </Link>
               )}
               {!isAuthenticated && (
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   className="mx-4 btn-primary text-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >

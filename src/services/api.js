@@ -2,7 +2,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3009/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,7 +29,7 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message || 'Something went wrong'
-    
+
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
@@ -42,7 +42,7 @@ api.interceptors.response.use(
     } else {
       toast.error(message)
     }
-    
+
     return Promise.reject(error)
   }
 )

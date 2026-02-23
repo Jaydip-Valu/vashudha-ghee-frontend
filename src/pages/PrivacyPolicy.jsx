@@ -4,7 +4,7 @@ import SEO from '@/components/Common/SEO'
 const PrivacyPolicy = () => {
   return (
     <>
-      <SEO 
+      <SEO
         title="Privacy Policy - Data Protection"
         description="Read Vashudha Ghee's privacy policy to understand how we collect, use, and protect your personal information. Your privacy is important to us."
         keywords="privacy policy, data protection, personal information, privacy rights"
@@ -46,12 +46,12 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Introduction</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  Vashudha Ghee ("we," "our," or "us") is committed to protecting your privacy. 
-                  This Privacy Policy explains how we collect, use, disclose, and safeguard your 
+                  Vashudha Ghee ("we," "our," or "us") is committed to protecting your privacy.
+                  This Privacy Policy explains how we collect, use, disclose, and safeguard your
                   information when you visit our website and use our services.
                 </p>
                 <p>
-                  By accessing or using our website, you agree to this Privacy Policy. If you 
+                  By accessing or using our website, you agree to this Privacy Policy. If you
                   do not agree with the terms, please do not access the site.
                 </p>
               </div>
@@ -107,20 +107,20 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Information Sharing and Disclosure</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  We do not sell, trade, or rent your personal information to third parties. 
+                  We do not sell, trade, or rent your personal information to third parties.
                   We may share your information in the following circumstances:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>
-                    <strong>Service Providers:</strong> With trusted third-party service providers 
+                    <strong>Service Providers:</strong> With trusted third-party service providers
                     who assist in operating our website, processing payments, and delivering products.
                   </li>
                   <li>
-                    <strong>Legal Requirements:</strong> When required by law, court order, or 
+                    <strong>Legal Requirements:</strong> When required by law, court order, or
                     government regulation.
                   </li>
                   <li>
-                    <strong>Business Transfers:</strong> In connection with a merger, acquisition, 
+                    <strong>Business Transfers:</strong> In connection with a merger, acquisition,
                     or sale of assets.
                   </li>
                   <li>
@@ -138,19 +138,19 @@ const PrivacyPolicy = () => {
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>
-                    <strong>Essential Cookies:</strong> Required for website functionality 
+                    <strong>Essential Cookies:</strong> Required for website functionality
                     (shopping cart, authentication).
                   </li>
                   <li>
                     <strong>Performance Cookies:</strong> Help us understand how visitors use our site.
                   </li>
                   <li>
-                    <strong>Marketing Cookies:</strong> Used to deliver relevant advertisements 
+                    <strong>Marketing Cookies:</strong> Used to deliver relevant advertisements
                     (only with your consent).
                   </li>
                 </ul>
                 <p>
-                  You can control cookies through your browser settings. However, disabling cookies 
+                  You can control cookies through your browser settings. However, disabling cookies
                   may affect website functionality.
                 </p>
               </div>
@@ -160,7 +160,7 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Data Security</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  We implement appropriate technical and organizational security measures to protect 
+                  We implement appropriate technical and organizational security measures to protect
                   your personal information:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
@@ -171,7 +171,7 @@ const PrivacyPolicy = () => {
                   <li>Employee training on data protection</li>
                 </ul>
                 <p>
-                  However, no method of transmission over the internet is 100% secure. While we 
+                  However, no method of transmission over the internet is 100% secure. While we
                   strive to protect your information, we cannot guarantee absolute security.
                 </p>
               </div>
@@ -208,8 +208,8 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Children's Privacy</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  Our services are not directed to individuals under 18 years of age. We do not 
-                  knowingly collect personal information from children. If you believe we have 
+                  Our services are not directed to individuals under 18 years of age. We do not
+                  knowingly collect personal information from children. If you believe we have
                   collected information from a child, please contact us immediately.
                 </p>
               </div>
@@ -219,8 +219,8 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Third-Party Links</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  Our website may contain links to third-party websites. We are not responsible 
-                  for the privacy practices of these external sites. We encourage you to read 
+                  Our website may contain links to third-party websites. We are not responsible
+                  for the privacy practices of these external sites. We encourage you to read
                   their privacy policies.
                 </p>
               </div>
@@ -230,8 +230,8 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Changes to This Privacy Policy</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  We may update this Privacy Policy from time to time. Changes will be posted on 
-                  this page with an updated "Last Modified" date. We encourage you to review this 
+                  We may update this Privacy Policy from time to time. Changes will be posted on
+                  this page with an updated "Last Modified" date. We encourage you to review this
                   policy periodically.
                 </p>
               </div>
@@ -241,7 +241,7 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
               <div className="space-y-3 text-gray-700">
                 <p>
-                  If you have any questions about this Privacy Policy or our data practices, 
+                  If you have any questions about this Privacy Policy or our data practices,
                   please contact us:
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg">

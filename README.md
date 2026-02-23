@@ -55,10 +55,10 @@ frontend/
    ```bash
    cp .env.example .env
    ```
-   
+
    Update the `.env` file with your configuration:
    ```
-   VITE_API_URL=http://localhost:5000
+   VITE_API_URL=http://localhost:3009
    VITE_APP_NAME=Vashudha Ghee
    VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
    ```
@@ -67,7 +67,7 @@ frontend/
    ```bash
    npm run dev
    ```
-   
+
    The app will be available at `http://localhost:3000`
 
 ## 📜 Available Scripts
