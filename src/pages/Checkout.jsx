@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import { MapPin, Plus } from 'lucide-react'
 import { selectCartItems, selectCartTotalAmount, clearCart } from '@/store/cartSlice'
 import Button from '@/components/Common/Button'
 import Input from '@/components/Common/Input'
@@ -9,6 +10,7 @@ import SEO from '@/components/Common/SEO'
 import { formatCurrency } from '@/utils/helpers'
 import orderService from '@/services/order.service'
 import paymentService from '@/services/payment.service'
+import addressService from '@/services/address.service'
 import toast from 'react-hot-toast'
 
 const Checkout = () => {
@@ -17,20 +19,84 @@ const Checkout = () => {
   const cartItems = useSelector(selectCartItems)
   const totalAmount = useSelector(selectCartTotalAmount)
   const [loading, setLoading] = useState(false)
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const [addresses, setAddresses] = useState([])
+  const [selectedAddressId, setSelectedAddressId] = useState(null)
+  const [showNewAddressForm, setShowNewAddressForm] = useState(false)
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
-  const onSubmit = async (data) => {
+  useEffect(() => {
+    fetchAddresses()
+  }, [])
+
+  const fetchAddresses = async () => {
+    try {
+      const data = await addressService.getAddresses()
+      const list = data.addresses || data || []
+      setAddresses(list)
+      if (list.length > 0) {
+        const defaultAddr = list.find((a) => a.is_default) || list[0]
+        setSelectedAddressId(defaultAddr.id)
+        setShowNewAddressForm(false)
+      } else {
+        setShowNewAddressForm(true)
+      }
+    } catch {
+      setShowNewAddressForm(true)
+    }
+  }
+
+  const buildShippingPayload = (addr) => ({
+    shipping_full_name: addr.full_name,
+    shipping_phone: addr.phone,
+    shipping_address_line1: addr.address_line1,
+    shipping_address_line2: addr.address_line2 || '',
+    shipping_city: addr.city,
+    shipping_state: addr.state,
+    shipping_postal_code: addr.postal_code,
+    shipping_country: addr.country || 'India',
+  })
+
+  const onSubmit = async (formData) => {
     try {
       setLoading(true)
-      
-      const orderData = {
-        shippingAddress: data,
-        items: cartItems,
-        totalAmount,
-        paymentMethod: data.paymentMethod,
+
+      let shippingPayload
+
+      if (showNewAddressForm || !selectedAddressId) {
+        // Save address if "save for later" checked or just use form data
+        shippingPayload = {
+          shipping_full_name: formData.full_name,
+          shipping_phone: formData.phone,
+          shipping_address_line1: formData.address_line1,
+          shipping_address_line2: formData.address_line2 || '',
+          shipping_city: formData.city,
+          shipping_state: formData.state,
+          shipping_postal_code: formData.postal_code,
+          shipping_country: formData.country || 'India',
+        }
+        if (formData.save_address) {
+          await addressService.createAddress({
+            full_name: formData.full_name,
+            phone: formData.phone,
+            address_line1: formData.address_line1,
+            address_line2: formData.address_line2 || '',
+            city: formData.city,
+            state: formData.state,
+            postal_code: formData.postal_code,
+            country: formData.country || 'India',
+          })
+        }
+      } else {
+        const addr = addresses.find((a) => a.id === selectedAddressId)
+        shippingPayload = buildShippingPayload(addr)
       }
 
-      if (data.paymentMethod === 'razorpay') {
+      const orderData = {
+        ...shippingPayload,
+        payment_method: formData.paymentMethod,
+      }
+
+      if (formData.paymentMethod === 'razorpay') {
         await handleRazorpayPayment(orderData)
       } else {
         await handleCODPayment(orderData)
@@ -54,24 +120,24 @@ const Checkout = () => {
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: razorpayOrder.amount,
-      currency: razorpayOrder.currency,
+      currency: razorpayOrder.currency || 'INR',
       name: 'Vashudha Ghee',
       description: 'Order Payment',
-      order_id: razorpayOrder.id,
+      order_id: razorpayOrder.razorpay_order_id,
       handler: async (response) => {
         try {
           await paymentService.verifyRazorpayPayment(response)
           dispatch(clearCart())
           toast.success('Order placed successfully!')
           navigate('/orders')
-        } catch (error) {
+        } catch (err) {
+          console.error('Payment verification failed:', err)
           toast.error('Payment verification failed')
         }
       },
       prefill: {
-        name: orderData.shippingAddress.fullName,
-        email: orderData.shippingAddress.email,
-        contact: orderData.shippingAddress.phone,
+        name: orderData.shipping_full_name,
+        contact: orderData.shipping_phone,
       },
     }
 
@@ -88,7 +154,7 @@ const Checkout = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Checkout - Complete Your Order"
         description="Complete your ghee order securely. Choose payment method: online payment via Razorpay or Cash on Delivery (COD). Free shipping available."
         noindex={true}
@@ -98,68 +164,146 @@ const Checkout = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Shipping Form */}
-            <div className="lg:col-span-2 card p-6">
-              <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  label="Full Name"
-                  {...register('fullName', { required: 'Full name is required' })}
-                  error={errors.fullName?.message}
-                />
-                <Input
-                  label="Email"
-                  type="email"
-                  {...register('email', { required: 'Email is required' })}
-                  error={errors.email?.message}
-                />
-                <Input
-                  label="Phone"
-                  {...register('phone', { required: 'Phone is required' })}
-                  error={errors.phone?.message}
-                />
-                <Input
-                  label="Pincode"
-                  {...register('pincode', { required: 'Pincode is required' })}
-                  error={errors.pincode?.message}
-                />
-              </div>
+            {/* Address + Payment */}
+            <div className="lg:col-span-2 space-y-6">
 
-              <Input
-                label="Address"
-                {...register('address', { required: 'Address is required' })}
-                error={errors.address?.message}
-                containerClassName="mt-4"
-              />
+              {/* Saved Addresses */}
+              {addresses.length > 0 && (
+                <div className="card p-6">
+                  <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <MapPin size={20} /> Shipping Address
+                  </h2>
+                  <div className="space-y-3">
+                    {addresses.map((addr) => (
+                      <label
+                        key={addr.id}
+                        className={`flex items-start p-3 border rounded cursor-pointer hover:bg-gray-50 ${
+                          selectedAddressId === addr.id && !showNewAddressForm
+                            ? 'border-primary-500 bg-primary-50'
+                            : 'border-gray-200'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="address_selection"
+                          className="mt-1 mr-3"
+                          checked={selectedAddressId === addr.id && !showNewAddressForm}
+                          onChange={() => {
+                            setSelectedAddressId(addr.id)
+                            setShowNewAddressForm(false)
+                          }}
+                        />
+                        <div>
+                          <p className="font-medium">{addr.full_name}</p>
+                          <p className="text-sm text-gray-600">{addr.phone}</p>
+                          <p className="text-sm text-gray-600">
+                            {addr.address_line1}
+                            {addr.address_line2 ? `, ${addr.address_line2}` : ''}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            {addr.city}, {addr.state} – {addr.postal_code}
+                          </p>
+                          <p className="text-sm text-gray-600">{addr.country}</p>
+                        </div>
+                      </label>
+                    ))}
 
-              <div className="grid md:grid-cols-3 gap-4 mt-4">
-                <Input
-                  label="City"
-                  {...register('city', { required: 'City is required' })}
-                  error={errors.city?.message}
-                />
-                <Input
-                  label="State"
-                  {...register('state', { required: 'State is required' })}
-                  error={errors.state?.message}
-                />
-                <Input
-                  label="Country"
-                  defaultValue="India"
-                  {...register('country')}
-                />
-              </div>
+                    <label
+                      className={`flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 ${
+                        showNewAddressForm ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="address_selection"
+                        className="mr-3"
+                        checked={showNewAddressForm}
+                        onChange={() => {
+                          setShowNewAddressForm(true)
+                          setSelectedAddressId(null)
+                          reset()
+                        }}
+                      />
+                      <Plus size={16} className="mr-1" />
+                      <span className="font-medium">Add a new address</span>
+                    </label>
+                  </div>
+                </div>
+              )}
+
+              {/* New Address Form */}
+              {showNewAddressForm && (
+                <div className="card p-6">
+                  <h2 className="text-xl font-semibold mb-6">
+                    {addresses.length === 0 ? 'Shipping Address' : 'New Address'}
+                  </h2>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <Input
+                      label="Full Name"
+                      {...register('full_name', { required: 'Full name is required' })}
+                      error={errors.full_name?.message}
+                    />
+                    <Input
+                      label="Phone"
+                      {...register('phone', { required: 'Phone is required' })}
+                      error={errors.phone?.message}
+                    />
+                  </div>
+
+                  <Input
+                    label="Address Line 1"
+                    {...register('address_line1', { required: 'Address is required' })}
+                    error={errors.address_line1?.message}
+                    containerClassName="mt-4"
+                  />
+                  <Input
+                    label="Address Line 2 (optional)"
+                    {...register('address_line2')}
+                    containerClassName="mt-4"
+                  />
+
+                  <div className="grid md:grid-cols-3 gap-4 mt-4">
+                    <Input
+                      label="City"
+                      {...register('city', { required: 'City is required' })}
+                      error={errors.city?.message}
+                    />
+                    <Input
+                      label="State"
+                      {...register('state', { required: 'State is required' })}
+                      error={errors.state?.message}
+                    />
+                    <Input
+                      label="Postal Code"
+                      {...register('postal_code', { required: 'Postal code is required' })}
+                      error={errors.postal_code?.message}
+                    />
+                  </div>
+
+                  <Input
+                    label="Country"
+                    defaultValue="India"
+                    {...register('country')}
+                    containerClassName="mt-4"
+                  />
+
+                  <label className="flex items-center mt-4 text-sm text-gray-600 cursor-pointer">
+                    <input type="checkbox" className="mr-2" {...register('save_address')} />
+                    Save this address for future orders
+                  </label>
+                </div>
+              )}
 
               {/* Payment Method */}
-              <div className="mt-6">
+              <div className="card p-6">
                 <h3 className="font-semibold mb-3">Payment Method</h3>
                 <div className="space-y-2">
                   <label className="flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50">
                     <input
                       type="radio"
                       value="razorpay"
-                      {...register('paymentMethod', { required: true })}
+                      {...register('paymentMethod', { required: 'Please select a payment method' })}
                       className="mr-3"
                     />
                     <span>Pay Online (Razorpay)</span>
@@ -168,12 +312,15 @@ const Checkout = () => {
                     <input
                       type="radio"
                       value="cod"
-                      {...register('paymentMethod', { required: true })}
+                      {...register('paymentMethod', { required: 'Please select a payment method' })}
                       className="mr-3"
                     />
                     <span>Cash on Delivery</span>
                   </label>
                 </div>
+                {errors.paymentMethod && (
+                  <p className="mt-1 text-sm text-red-600">{errors.paymentMethod.message}</p>
+                )}
               </div>
             </div>
 
@@ -181,10 +328,10 @@ const Checkout = () => {
             <div className="lg:col-span-1">
               <div className="card p-6 sticky top-20">
                 <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-                
+
                 <div className="space-y-2 mb-4">
                   {cartItems.map((item) => (
-                    <div key={item._id} className="flex justify-between text-sm">
+                    <div key={item.id || item._id} className="flex justify-between text-sm">
                       <span>{item.name} x {item.quantity}</span>
                       <span>{formatCurrency(item.price * item.quantity)}</span>
                     </div>
