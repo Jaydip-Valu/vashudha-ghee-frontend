@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
-import { Plus, Edit, Trash2, X, Upload, ToggleLeft, ToggleRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Plus, Edit, Trash2, X, ImagePlus, ToggleLeft, ToggleRight } from 'lucide-react'
 import Sidebar from '@/components/Layout/Sidebar'
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
 import Input from '@/components/Common/Input'
 import Loading from '@/components/Common/Loading'
 import { formatCurrency, getImageUrl } from '@/utils/helpers'
-import { PRODUCT_CATEGORIES } from '@/utils/constants'
+import { PRODUCT_CATEGORIES, MAX_FILE_SIZE, ALLOWED_IMAGE_TYPES } from '@/utils/constants'
 import productService from '@/services/product.service'
 import toast from 'react-hot-toast'
 
@@ -35,10 +35,20 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     weight: product.weight ?? '',
     unit: product.unit || 'gm',
     isFeatured: product.isFeatured || false,
-    isActive: product.isActive !== false, // default true if field absent
+    isActive: product.isActive !== false,
   } : { ...EMPTY_FORM })
   const [errors, setErrors] = useState({})
   const [saving, setSaving] = useState(false)
+
+  // Image state
+  const [newFiles, setNewFiles] = useState([])          // File objects chosen by user
+  const [newPreviews, setNewPreviews] = useState([])    // object-URL strings for new files
+  const fileInputRef = useRef(null)
+
+  // Revoke object URLs when component unmounts or previews change
+  useEffect(() => {
+    return () => { newPreviews.forEach((url) => URL.revokeObjectURL(url)) }
+  }, [newPreviews])
 
   const validate = () => {
     const e = {}
@@ -57,6 +67,36 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     const { name, value, type, checked } = e.target
     setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
     setErrors((prev) => ({ ...prev, [name]: undefined }))
+  }
+
+  const handleFileChange = (e) => {
+    const selected = Array.from(e.target.files)
+    const valid = []
+    const previews = []
+    for (const file of selected) {
+      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+        toast.error(`${file.name}: unsupported format. Use JPEG, PNG or WebP.`)
+        continue
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error(`${file.name}: file too large. Maximum size is 5 MB.`)
+        continue
+      }
+      valid.push(file)
+      previews.push(URL.createObjectURL(file))
+    }
+    // Revoke old previews before replacing
+    newPreviews.forEach((url) => URL.revokeObjectURL(url))
+    setNewFiles(valid)
+    setNewPreviews(previews)
+    // Reset file input so the same file can be re-selected after removing
+    if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  const removeNewFile = (index) => {
+    URL.revokeObjectURL(newPreviews[index])
+    setNewFiles((prev) => prev.filter((_, i) => i !== index))
+    setNewPreviews((prev) => prev.filter((_, i) => i !== index))
   }
 
   const handleSubmit = async (e) => {
@@ -79,13 +119,26 @@ const ProductModal = ({ product, onClose, onSaved }) => {
 
     try {
       setSaving(true)
+      let productId = product?._id
+
       if (isEdit) {
-        await productService.updateProduct(product._id, payload)
+        await productService.updateProduct(productId, payload)
         toast.success('Product updated successfully')
       } else {
-        await productService.createProduct(payload)
+        const result = await productService.createProduct(payload)
+        // Support both `{ _id }` and `{ product: { _id } }` API response shapes
+        productId = result?.product?._id || result?._id
         toast.success('Product created successfully')
       }
+
+      // Upload images if any were selected
+      if (newFiles.length > 0 && productId) {
+        const formData = new FormData()
+        newFiles.forEach((file) => formData.append('images', file))
+        await productService.uploadImages(productId, formData)
+        toast.success('Images uploaded successfully')
+      }
+
       onSaved()
     } catch (err) {
       // Error toast already shown by the api interceptor
@@ -94,6 +147,9 @@ const ProductModal = ({ product, onClose, onSaved }) => {
       setSaving(false)
     }
   }
+
+  // Existing images from the product (edit mode)
+  const existingImages = isEdit ? (product.images || []) : []
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
@@ -219,6 +275,73 @@ const ProductModal = ({ product, onClose, onSaved }) => {
             </div>
           </div>
 
+          {/* ── Product Images ── */}
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Product Images
+            </label>
+
+            {/* Existing images (edit mode) */}
+            {existingImages.length > 0 && (
+              <div className="mb-3">
+                <p className="text-xs text-gray-500 mb-2">Current images:</p>
+                <div className="flex flex-wrap gap-2">
+                  {existingImages.map((img, i) => (
+                    <div key={i} className="relative w-16 h-16 rounded-lg overflow-hidden border border-gray-200">
+                      <img
+                        src={getImageUrl(img)}
+                        alt={`Product image ${i + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* New image previews */}
+            {newPreviews.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-3">
+                {newPreviews.map((url, i) => (
+                  <div key={i} className="relative w-16 h-16 rounded-lg overflow-hidden border border-primary-300">
+                    <img src={url} alt={`New image ${i + 1}`} className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => removeNewFile(i)}
+                      className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center hover:bg-red-600"
+                      title="Remove"
+                    >
+                      <X size={10} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Drop zone / file picker */}
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-xl py-5 hover:border-primary-400 hover:bg-primary-50 transition-colors cursor-pointer"
+            >
+              <ImagePlus size={28} className="text-gray-400" />
+              <span className="text-sm text-gray-500">
+                Click to browse and select images
+              </span>
+              <span className="text-xs text-gray-400">
+                JPEG, PNG, WebP — max 5 MB each
+              </span>
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={ALLOWED_IMAGE_TYPES.join(',')}
+              multiple
+              className="hidden"
+              onChange={handleFileChange}
+            />
+          </div>
+
           {/* Flags row */}
           <div className="flex items-center gap-6">
             <label className="flex items-center gap-2 cursor-pointer">
@@ -247,15 +370,6 @@ const ProductModal = ({ product, onClose, onSaved }) => {
             </label>
           </div>
 
-          {isEdit && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700 flex items-start gap-2">
-              <Upload size={16} className="flex-shrink-0 mt-0.5" />
-              <span>
-                To update product images, use the <strong>Upload Images</strong> option after saving.
-              </span>
-            </div>
-          )}
-
           {/* Footer actions */}
           <div className="flex justify-end gap-3 pt-2">
             <Button variant="outline" type="button" onClick={onClose}>
@@ -270,6 +384,7 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     </div>
   )
 }
+
 
 const ProductsManagement = () => {
   const [products, setProducts] = useState([])
