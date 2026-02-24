@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus, Edit, Trash2, X, Upload } from 'lucide-react'
+import { Plus, Edit, Trash2, X, Upload, ToggleLeft, ToggleRight } from 'lucide-react'
 import Sidebar from '@/components/Layout/Sidebar'
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
@@ -20,6 +20,7 @@ const EMPTY_FORM = {
   weight: '',
   unit: 'gm',
   isFeatured: false,
+  isActive: true,
 }
 
 const ProductModal = ({ product, onClose, onSaved }) => {
@@ -34,6 +35,7 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     weight: product.weight ?? '',
     unit: product.unit || 'gm',
     isFeatured: product.isFeatured || false,
+    isActive: product.isActive !== false, // default true if field absent
   } : { ...EMPTY_FORM })
   const [errors, setErrors] = useState({})
   const [saving, setSaving] = useState(false)
@@ -72,6 +74,7 @@ const ProductModal = ({ product, onClose, onSaved }) => {
       weight: form.weight ? Number(form.weight) : undefined,
       unit: form.unit,
       isFeatured: form.isFeatured,
+      isActive: form.isActive,
     }
 
     try {
@@ -216,18 +219,33 @@ const ProductModal = ({ product, onClose, onSaved }) => {
             </div>
           </div>
 
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              name="isFeatured"
-              checked={form.isFeatured}
-              onChange={handleChange}
-              className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
-            />
-            <span className="text-sm font-medium text-gray-700">
-              Mark as Featured Product
-            </span>
-          </label>
+          {/* Flags row */}
+          <div className="flex items-center gap-6">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                name="isFeatured"
+                checked={form.isFeatured}
+                onChange={handleChange}
+                className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+              />
+              <span className="text-sm font-medium text-gray-700">
+                Mark as Featured
+              </span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                name="isActive"
+                checked={form.isActive}
+                onChange={handleChange}
+                className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+              />
+              <span className="text-sm font-medium text-gray-700">
+                Active (visible to customers)
+              </span>
+            </label>
+          </div>
 
           {isEdit && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700 flex items-start gap-2">
@@ -259,6 +277,7 @@ const ProductsManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState(null)
   const [deletingId, setDeletingId] = useState(null)
+  const [togglingId, setTogglingId] = useState(null)
 
   useEffect(() => {
     fetchProducts()
@@ -290,6 +309,20 @@ const ProductsManagement = () => {
   const closeModal = () => {
     setIsModalOpen(false)
     setEditingProduct(null)
+  }
+
+  const handleToggleStatus = async (product) => {
+    const newStatus = product.isActive === false
+    try {
+      setTogglingId(product._id)
+      await productService.toggleProductStatus(product._id, newStatus)
+      toast.success(`Product ${newStatus ? 'activated' : 'deactivated'} successfully`)
+      fetchProducts()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setTogglingId(null)
+    }
   }
 
   const handleDelete = async (id) => {
@@ -372,64 +405,112 @@ const ProductsManagement = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {products.map((product) => (
-                    <tr key={product._id}>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center">
-                          <img
-                            src={getImageUrl(product.images?.[0])}
-                            alt={product.name}
-                            className="w-12 h-12 rounded object-cover mr-3"
-                          />
-                          <span className="font-medium">{product.name}</span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-gray-600">{product.category}</td>
-                      <td className="px-6 py-4 font-semibold">
-                        {formatCurrency(product.price)}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={product.stock > 10 ? 'text-green-600' : 'text-red-600'}>
-                          {product.stock}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          product.stock > 0
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex justify-end space-x-2">
-                          <button
-                            onClick={() => openEditModal(product)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded"
-                            title="Edit product"
-                          >
-                            <Edit size={18} />
-                          </button>
-                          <button
-                            onClick={() => handleDelete(product._id)}
-                            disabled={deletingId === product._id}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded disabled:opacity-50"
-                            title="Delete product"
-                          >
-                            {deletingId === product._id ? (
-                              <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                              </svg>
-                            ) : (
-                              <Trash2 size={18} />
+                  {products.map((product) => {
+                    const isActive = product.isActive !== false
+                    return (
+                      <tr key={product._id} className={!isActive ? 'bg-gray-50 opacity-75' : ''}>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center">
+                            <img
+                              src={getImageUrl(product.images?.[0])}
+                              alt={product.name}
+                              className="w-12 h-12 rounded object-cover mr-3"
+                            />
+                            <div>
+                              <span className="font-medium block">{product.name}</span>
+                              {product.isFeatured && (
+                                <span className="text-xs text-primary-600 font-medium">⭐ Featured</span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-gray-600">{product.category}</td>
+                        <td className="px-6 py-4">
+                          <div>
+                            <span className="font-semibold">{formatCurrency(product.price)}</span>
+                            {product.mrp && product.mrp > product.price && (
+                              <span className="text-xs text-gray-400 line-through ml-1">
+                                {formatCurrency(product.mrp)}
+                              </span>
                             )}
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={product.stock > 10 ? 'text-green-600' : 'text-red-600'}>
+                            {product.stock}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex flex-col gap-1">
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                              isActive
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-gray-100 text-gray-600'
+                            }`}>
+                              {isActive ? '● Active' : '○ Inactive'}
+                            </span>
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                              product.stock > 0
+                                ? 'bg-blue-100 text-blue-700'
+                                : 'bg-red-100 text-red-700'
+                            }`}>
+                              {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex justify-end items-center space-x-1">
+                            {/* Active / Inactive toggle */}
+                            <button
+                              onClick={() => handleToggleStatus(product)}
+                              disabled={togglingId === product._id}
+                              className={`p-2 rounded transition-colors ${
+                                isActive
+                                  ? 'text-green-600 hover:bg-green-50'
+                                  : 'text-gray-400 hover:bg-gray-100'
+                              } disabled:opacity-50`}
+                              title={isActive ? 'Deactivate product' : 'Activate product'}
+                            >
+                              {togglingId === product._id ? (
+                                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                              ) : isActive ? (
+                                <ToggleRight size={20} />
+                              ) : (
+                                <ToggleLeft size={20} />
+                              )}
+                            </button>
+                            {/* Edit */}
+                            <button
+                              onClick={() => openEditModal(product)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                              title="Edit product"
+                            >
+                              <Edit size={18} />
+                            </button>
+                            {/* Delete */}
+                            <button
+                              onClick={() => handleDelete(product._id)}
+                              disabled={deletingId === product._id}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded disabled:opacity-50"
+                              title="Delete product"
+                            >
+                              {deletingId === product._id ? (
+                                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                              ) : (
+                                <Trash2 size={18} />
+                              )}
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
@@ -441,4 +522,3 @@ const ProductsManagement = () => {
 }
 
 export default ProductsManagement
-

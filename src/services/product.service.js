@@ -41,6 +41,18 @@ export const productService = {
     return response.data
   },
 
+  // Toggle product active / inactive status (Admin)
+  toggleProductStatus: async (id, isActive) => {
+    const response = await api.patch(`/products/${id}/status`, { isActive })
+    return response.data
+  },
+
+  // Update product stock quantity (Admin)
+  updateStock: async (id, stock) => {
+    const response = await api.patch(`/products/${id}/stock`, { stock })
+    return response.data
+  },
+
   // Get product categories
   getCategories: async () => {
     const response = await api.get('/products/categories')
