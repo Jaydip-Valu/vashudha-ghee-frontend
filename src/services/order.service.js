@@ -82,15 +82,15 @@ export const orderService = {
     return normalizeOrder(raw)
   },
 
-  // Cancel order
+  // Cancel order — PATCH /orders/:id/cancel
   cancelOrder: async (orderId) => {
-    const response = await api.put(`/orders/${orderId}/cancel`)
+    const response = await api.patch(`/orders/${orderId}/cancel`)
     const raw = response.data
     if (raw && raw.order) return { ...raw, order: normalizeOrder(raw.order) }
     return normalizeOrder(raw)
   },
 
-  // Get all orders (Admin)
+  // Get all orders (Admin) — GET /admin/orders
   getAllOrders: async (filters = {}) => {
     const queryParams = new URLSearchParams()
 
@@ -100,30 +100,22 @@ export const orderService = {
     if (filters.startDate) queryParams.append('start_date', filters.startDate)
     if (filters.endDate) queryParams.append('end_date', filters.endDate)
 
-    const response = await api.get(`/orders/admin/all?${queryParams.toString()}`)
+    const response = await api.get(`/admin/orders?${queryParams.toString()}`)
     return normalizeOrderList(response.data)
   },
 
-  // Update order status (Admin)
+  // Update order status (Admin) — PATCH /admin/orders/:id/update_status
   updateOrderStatus: async (orderId, status) => {
-    const response = await api.put(`/orders/${orderId}/status`, { status })
+    const response = await api.patch(`/admin/orders/${orderId}/update_status`, { status })
     const raw = response.data
     if (raw && raw.order) return { ...raw, order: normalizeOrder(raw.order) }
     return normalizeOrder(raw)
   },
 
-  // Get order statistics (Admin)
-  getOrderStats: async () => {
-    const response = await api.get('/orders/admin/stats')
+  // Get dashboard statistics (Admin) — GET /admin/dashboard
+  getDashboardStats: async () => {
+    const response = await api.get('/admin/dashboard')
     return response.data
-  },
-
-  // Track order
-  trackOrder: async (orderId) => {
-    const response = await api.get(`/orders/${orderId}/track`)
-    const raw = response.data
-    if (raw && raw.order) return { ...raw, order: normalizeOrder(raw.order) }
-    return normalizeOrder(raw)
   },
 }
 

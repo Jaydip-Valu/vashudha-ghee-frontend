@@ -7,39 +7,27 @@ export const cartService = {
     return response.data
   },
 
-  // Add item to cart
+  // Add item to cart — POST /cart/add_item
   addToCart: async (productId, quantity = 1) => {
-    const response = await api.post('/cart', { product_id: productId, quantity })
+    const response = await api.post('/cart/add_item', { product_id: productId, quantity })
     return response.data
   },
 
-  // Update cart item quantity
+  // Update cart item quantity — PATCH /cart/update_item/:id
   updateCartItem: async (itemId, quantity) => {
-    const response = await api.put(`/cart/${itemId}`, { quantity })
+    const response = await api.patch(`/cart/update_item/${itemId}`, { quantity })
     return response.data
   },
 
-  // Remove item from cart
+  // Remove item from cart — DELETE /cart/remove_item/:id
   removeFromCart: async (itemId) => {
-    const response = await api.delete(`/cart/${itemId}`)
+    const response = await api.delete(`/cart/remove_item/${itemId}`)
     return response.data
   },
 
-  // Clear entire cart
+  // Clear entire cart — DELETE /cart/clear
   clearCart: async () => {
-    const response = await api.delete('/cart')
-    return response.data
-  },
-
-  // Apply coupon code
-  applyCoupon: async (couponCode) => {
-    const response = await api.post('/cart/coupon', { code: couponCode })
-    return response.data
-  },
-
-  // Remove coupon
-  removeCoupon: async () => {
-    const response = await api.delete('/cart/coupon')
+    const response = await api.delete('/cart/clear')
     return response.data
   },
 }
