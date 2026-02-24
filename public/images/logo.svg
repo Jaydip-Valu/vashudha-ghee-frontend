@@ -1,0 +1,57 @@
+<svg width="220" height="70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 70">
+  <defs>
+    <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="logoBadge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Badge / emblem circle -->
+  <circle cx="35" cy="35" r="32" fill="url(#logoGold)"/>
+  <circle cx="35" cy="35" r="26" fill="#92400e"/>
+  <circle cx="35" cy="35" r="22" fill="url(#logoBadge)"/>
+
+  <!-- Cow silhouette inside badge -->
+  <!-- body -->
+  <ellipse cx="35" cy="39" rx="11" ry="7" fill="#92400e"/>
+  <!-- head -->
+  <ellipse cx="24" cy="34" rx="7" ry="6" fill="#92400e"/>
+  <!-- ear -->
+  <ellipse cx="20" cy="30" rx="3" ry="4" fill="#92400e" transform="rotate(-15,20,30)"/>
+  <!-- horn left -->
+  <path d="M19 28 Q15 22 18 19" stroke="#d97706" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- horn right -->
+  <path d="M28 26 Q31 20 29 18" stroke="#d97706" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- legs -->
+  <line x1="29" y1="45" x2="29" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="34" y1="46" x2="34" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="39" y1="46" x2="39" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="44" y1="45" x2="44" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- tail -->
+  <path d="M46 38 Q52 34 50 40" stroke="#92400e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- udder dot -->
+  <ellipse cx="36" cy="46" rx="4" ry="2.5" fill="#fca5a5" opacity="0.7"/>
+  <!-- eye -->
+  <circle cx="22" cy="33" r="1.5" fill="#fef3c7"/>
+  <!-- ghee drop above -->
+  <path d="M35 15 Q37 20 35 23 Q33 20 35 15Z" fill="#d97706"/>
+
+  <!-- Brand text -->
+  <text x="78" y="26" font-family="Poppins, Georgia, serif" font-size="20" font-weight="800"
+        fill="#92400e" letter-spacing="-0.5">Vashudha</text>
+  <text x="78" y="46" font-family="Poppins, Georgia, serif" font-size="16" font-weight="700"
+        fill="#d97706" letter-spacing="4">GHEE</text>
+
+  <!-- Decorative divider line under GHEE -->
+  <line x1="78" y1="52" x2="210" y2="52" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Tagline -->
+  <text x="78" y="63" font-family="Arial, sans-serif" font-size="8" font-weight="400"
+        fill="#b45309" letter-spacing="1.5" opacity="0.85">PURE · NATURAL · TRADITIONAL</text>
+</svg>
+

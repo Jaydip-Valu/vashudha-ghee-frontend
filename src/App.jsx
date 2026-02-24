@@ -22,7 +22,7 @@ import FAQ from './pages/FAQ'
 import TrackOrder from './pages/TrackOrder'
 import ShippingPolicy from './pages/ShippingPolicy'
 import ReturnPolicy from './pages/ReturnPolicy'
-import PrivacyPolicy from './pages/PrivacyPolicy'
+// import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsConditions from './pages/TermsConditions'
 
 // Protected Pages
@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('token')
-    
+
     if (user && token) {
       dispatch(setCredentials({ user: JSON.parse(user), token }))
     }
@@ -59,7 +59,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          
+
           {/* Informational Pages */}
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
@@ -67,7 +67,6 @@ function App() {
           <Route path="/track-order" element={<TrackOrder />} />
           <Route path="/shipping" element={<ShippingPolicy />} />
           <Route path="/returns" element={<ReturnPolicy />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsConditions />} />
 
           {/* Protected Routes */}

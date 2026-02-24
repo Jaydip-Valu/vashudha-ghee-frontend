@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ShoppingBag, Truck, Shield, Heart, Star, Leaf, Award, ChevronRight, CheckCircle } from 'lucide-react'
+import { ArrowRight, ShoppingBag, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle } from 'lucide-react'
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
 import ProductCard from '@/components/Product/ProductCard'
@@ -48,30 +48,40 @@ const Home = () => {
     }
   ]
 
+  const cowBenefits = [
+    { icon: Leaf, text: 'Rich in A2 beta-casein protein' },
+    { icon: Award, text: 'Boosts immunity & digestion' },
+    { icon: CheckCircle, text: 'Traditional Bilona churning method' },
+    { icon: Star, text: 'Grass-fed free-roaming cows' },
+  ]
+
+  const buffaloBenefits = [
+    { icon: Leaf, text: 'Higher fat content & creaminess' },
+    { icon: Award, text: 'Rich source of calcium & minerals' },
+    { icon: CheckCircle, text: 'Slow-cooked for deep aroma' },
+    { icon: Star, text: 'Ideal for cooking & sweets' },
+  ]
+
   const processSteps = [
     {
       step: '01',
-      title: 'Fresh A2 Milk',
-      description: 'We collect fresh milk every morning from our grass-fed Gir cows raised in natural surroundings.',
-      color: 'bg-yellow-50 border-yellow-200'
+      title: 'Fresh Milk Collection',
+      description: 'We collect fresh, pure milk from healthy, grass-fed cows and buffaloes every morning.'
     },
     {
       step: '02',
-      title: 'Curd Setting',
-      description: 'The milk is cultured overnight into rich, creamy curd using our traditional starter culture.',
-      color: 'bg-orange-50 border-orange-200'
+      title: 'Curd Preparation',
+      description: 'The milk is slowly fermented into curd using traditional natural starters overnight.'
     },
     {
       step: '03',
       title: 'Bilona Churning',
-      description: 'Curd is hand-churned with the ancient bilona method to separate pure white butter.',
-      color: 'bg-amber-50 border-amber-200'
+      description: 'Curd is hand-churned using the ancient Bilona method to separate pure butter.'
     },
     {
       step: '04',
       title: 'Slow Simmering',
-      description: 'The butter is slowly simmered on a low flame until golden, aromatic ghee is ready.',
-      color: 'bg-green-50 border-green-200'
+      description: 'The butter is slow-cooked on a low flame until it transforms into golden, aromatic ghee.'
     }
   ]
 
@@ -80,34 +90,25 @@ const Home = () => {
       name: 'Priya Sharma',
       location: 'Mumbai',
       rating: 5,
-      text: 'The aroma of Vashudha Ghee reminds me of my grandmother\'s kitchen. Absolutely pure and delicious. My family loves it!'
+      text: 'The best ghee I have ever tasted! The aroma is heavenly and the quality is simply outstanding. My family loves it!'
     },
     {
       name: 'Rajesh Patel',
       location: 'Ahmedabad',
       rating: 5,
-      text: 'I\'ve tried many ghee brands but this one stands out. You can clearly taste the difference — it\'s genuinely authentic.'
+      text: 'Vashudha Ghee brings back childhood memories. Purely authentic, no artificial taste. Highly recommended!'
     },
     {
       name: 'Anita Desai',
-      location: 'Bangalore',
+      location: 'Surat',
       rating: 5,
-      text: 'We switched to Vashudha Ghee for health reasons and we\'re so glad we did. The quality is exceptional and delivery is always on time.'
+      text: 'The buffalo ghee is absolutely rich and creamy. Perfect for making sweets. Will keep ordering from here!'
     }
-  ]
-
-  const benefits = [
-    'Rich in fat-soluble vitamins A, D, E & K',
-    'Boosts immunity and supports gut health',
-    'Enhances flavour of every dish',
-    'Good source of healthy saturated fats',
-    'Supports bone and brain health',
-    'Lactose & casein free (suitable for many dairy-sensitive people)'
   ]
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Home - Premium Pure Desi Ghee"
         description="Experience the authentic taste of traditional Indian ghee. Made from the finest quality A2 cow milk using time-honored bilona methods. 100% pure, natural, and healthy."
         keywords="ghee, desi ghee, pure ghee, organic ghee, A2 ghee, cow ghee, buffalo ghee, premium ghee, traditional ghee, Indian ghee, bilona ghee"
@@ -123,32 +124,35 @@ const Home = () => {
           }
         }}
       />
-      
+
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-50 via-yellow-50 to-secondary-50 overflow-hidden">
-        {/* Decorative background circles */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full opacity-40 -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-secondary-100 rounded-full opacity-30 translate-y-1/3 -translate-x-1/4" />
-        
-        <div className="container-custom py-16 md:py-24 relative z-10">
+      <section className="bg-gradient-to-br from-primary-50 via-amber-50 to-secondary-50 py-20">
+        <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
-                <Leaf size={14} />
-                100% Pure A2 Bilona Ghee
+              <div className="flex items-center gap-3 mb-5">
+                <img src="/images/logo.svg" alt="Vashudha Ghee Logo" className="h-16 w-auto" />
               </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-6 leading-tight">
-                Pure Desi Ghee,
-                <span className="block text-primary-600 mt-1">Made with Love</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-6">
+                Pure Desi Ghee
+                <span className="block text-primary-500">Made with Love</span>
               </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 mb-4">
                 Experience the authentic taste of traditional Indian ghee.
-                Handcrafted using the ancient bilona method from A2 milk of
-                grass-fed Gir cows — just as nature intended.
+                Made from the finest quality cow &amp; buffalo milk using time-honored Bilona methods.
               </p>
-              <div className="flex flex-wrap gap-4 mb-10">
+              <div className="flex flex-wrap gap-3 mb-8">
+                <span className="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
+                  <CheckCircle size={14} /> 100% Natural
+                </span>
+                <span className="inline-flex items-center gap-1 bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full text-sm font-medium">
+                  <CheckCircle size={14} /> No Preservatives
+                </span>
+                <span className="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
+                  <CheckCircle size={14} /> Farm Fresh
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-4">
                 <Link to="/products">
                   <Button size="lg" className="shadow-lg hover:shadow-xl">
                     Shop Now
@@ -161,7 +165,7 @@ const Home = () => {
                   </Button>
                 </Link>
               </div>
-              
+
               {/* Trust badges */}
               <div className="flex flex-wrap gap-6 text-sm text-gray-600">
                 <div className="flex items-center gap-1.5">
@@ -178,23 +182,21 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            
-            <div className="relative flex justify-center">
-              <div className="relative">
-                <img
-                  src="/images/hero-ghee-jar.svg"
-                  alt="Vashudha Pure Desi Ghee - Traditional Indian Ghee Jar"
-                  className="w-full max-w-md drop-shadow-2xl"
-                  loading="eager"
-                />
-              </div>
+            <div className="relative flex items-center justify-center">
+              <div className="absolute -inset-6 bg-gradient-to-br from-primary-200 via-amber-200 to-secondary-200 rounded-3xl opacity-40 blur-2xl"></div>
+              <img
+                src="/images/hero-ghee.svg"
+                alt="Pure Desi Ghee - Traditional Indian Brass Ghee Matka with Spoon and Leaves"
+                className="relative rounded-3xl shadow-2xl w-full max-w-lg"
+                loading="eager"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bg-primary-600 text-white py-8">
+      {/* Features / USP Strip */}
+      <section className="py-16 bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
@@ -219,7 +221,7 @@ const Home = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon
               return (
-                <div key={index} className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-50 hover:bg-primary-50 transition-colors">
+                <div key={index} className="text-center p-6 rounded-2xl hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100 text-primary-600 mb-4">
                     <Icon size={30} />
                   </div>
@@ -232,172 +234,165 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Section 3 - Cow Ghee */}
+      <section className="py-20 bg-gradient-to-r from-amber-50 to-primary-50">
         <div className="container-custom">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-primary-600 font-semibold text-sm uppercase tracking-widest mb-2">Our Products</p>
-              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
-                Bestselling Ghee
+          <div className="grid md:grid-cols-2 gap-14 items-center">
+            <div className="order-2 md:order-1">
+              <span className="inline-block bg-primary-100 text-primary-700 text-sm font-semibold px-4 py-1 rounded-full mb-4 uppercase tracking-wide">
+                🐄 Cow Ghee
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-5">
+                Pure A2 Desi Cow Ghee
+                <span className="block text-primary-500 text-2xl md:text-3xl mt-1">Nature&apos;s Golden Elixir</span>
               </h2>
-            </div>
-            <Link to="/products" className="hidden md:flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors">
-              View All <ChevronRight size={18} />
-            </Link>
-          </div>
-
-          {productsLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-white rounded-xl overflow-hidden animate-pulse">
-                  <div className="bg-gray-200 h-56" />
-                  <div className="p-4 space-y-3">
-                    <div className="h-4 bg-gray-200 rounded w-3/4" />
-                    <div className="h-4 bg-gray-200 rounded w-1/2" />
-                    <div className="h-8 bg-gray-200 rounded" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : featuredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <ShoppingBag size={48} className="mx-auto text-gray-300 mb-4" />
-              <p className="text-gray-500 mb-4">Products coming soon!</p>
+              <p className="text-gray-600 text-lg mb-6">
+                Our desi cow ghee is handcrafted from the milk of free-roaming, grass-fed indigenous cows.
+                Prepared using the traditional Bilona method, every spoonful carries the richness of nature
+                and the warmth of heritage.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {cowBenefits.map((benefit, i) => {
+                  const Icon = benefit.icon
+                  return (
+                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
+                        <Icon size={16} className="text-primary-600" />
+                      </span>
+                      {benefit.text}
+                    </li>
+                  )
+                })}
+              </ul>
               <Link to="/products">
-                <Button>Browse All Products</Button>
+                <Button size="lg">
+                  Shop Cow Ghee
+                  <ArrowRight size={18} className="ml-2" />
+                </Button>
               </Link>
             </div>
-          )}
-
-          <div className="text-center mt-8 md:hidden">
-            <Link to="/products">
-              <Button variant="outline">
-                View All Products <ChevronRight size={18} className="ml-1" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* How It's Made - Process Section */}
-      <section className="py-16 bg-white">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-primary-600 font-semibold text-sm uppercase tracking-widest mb-2">Our Process</p>
-              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
-                The Ancient Bilona Method
-              </h2>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Our ghee is made using the traditional bilona process — a centuries-old technique that preserves
-                all the natural goodness and creates that distinctive, rich aroma you can&apos;t get anywhere else.
-              </p>
-              <div className="space-y-4">
-                {processSteps.map((step) => (
-                  <div key={step.step} className={`flex gap-4 p-4 rounded-xl border ${step.color}`}>
-                    <div className="text-2xl font-bold font-heading text-primary-400 w-10 shrink-0">{step.step}</div>
-                    <div>
-                      <h4 className="font-semibold text-gray-800 mb-1">{step.title}</h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="/images/bilona-process.svg"
-                alt="Traditional Bilona ghee making process"
-                className="w-full rounded-2xl shadow-xl"
-                loading="lazy"
-              />
-              <div className="absolute -bottom-4 -right-4 bg-primary-500 text-white rounded-xl p-4 shadow-lg hidden md:block">
-                <Award size={28} className="mb-1" />
-                <div className="text-sm font-semibold">Handcrafted</div>
-                <div className="text-xs opacity-90">with care</div>
+            <div className="order-1 md:order-2 flex justify-center">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-primary-200 rounded-3xl opacity-20 blur-xl"></div>
+                <img
+                  src="/images/cow.svg"
+                  alt="Desi Cow - Source of Pure A2 Cow Ghee"
+                  className="relative rounded-2xl shadow-xl w-full max-w-md"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-16 bg-gradient-to-br from-primary-50 to-secondary-50">
+      {/* Section 4 - Buffalo Ghee */}
+      <section className="py-20 bg-gradient-to-r from-purple-50 to-violet-50">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <img
-                src="/images/desi-cow.svg"
-                alt="A2 Desi Gir Cow - Source of our pure milk"
-                className="w-full rounded-2xl shadow-xl"
-                loading="lazy"
-              />
+          <div className="grid md:grid-cols-2 gap-14 items-center">
+            <div className="flex justify-center">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-purple-200 rounded-3xl opacity-20 blur-xl"></div>
+                <img
+                  src="/images/buffalo.svg"
+                  alt="Buffalo - Source of Rich Creamy Buffalo Ghee"
+                  className="relative rounded-2xl shadow-xl w-full max-w-md"
+                  loading="lazy"
+                />
+              </div>
             </div>
             <div>
-              <p className="text-primary-600 font-semibold text-sm uppercase tracking-widest mb-2">Why Ghee?</p>
-              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
-                Health Benefits of Pure Desi Ghee
+              <span className="inline-block bg-purple-100 text-purple-700 text-sm font-semibold px-4 py-1 rounded-full mb-4 uppercase tracking-wide">
+                🐃 Buffalo Ghee
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-5">
+                Pure Buffalo Ghee
+                <span className="block text-purple-600 text-2xl md:text-3xl mt-1">Rich, Creamy &amp; Aromatic</span>
               </h2>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Ghee has been a cornerstone of Indian cooking and Ayurvedic medicine for thousands of years.
-                Our pure A2 bilona ghee brings you all the natural health benefits in every spoonful.
+              <p className="text-gray-600 text-lg mb-6">
+                Our buffalo ghee is prepared from the pure, thick milk of well-nourished buffaloes.
+                Slow-cooked to perfection, it delivers a deep, rich flavour and a golden hue that
+                elevates every dish it touches.
               </p>
-              <ul className="space-y-3">
-                {benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle size={20} className="text-secondary-500 shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{benefit}</span>
-                  </li>
-                ))}
+              <ul className="space-y-3 mb-8">
+                {buffaloBenefits.map((benefit, i) => {
+                  const Icon = benefit.icon
+                  return (
+                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                        <Icon size={16} className="text-purple-600" />
+                      </span>
+                      {benefit.text}
+                    </li>
+                  )
+                })}
               </ul>
-              <div className="mt-8">
-                <Link to="/products">
-                  <Button size="lg">
-                    Shop Now <ArrowRight size={18} className="ml-2" />
-                  </Button>
-                </Link>
-              </div>
+              <Link to="/products">
+                <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
+                  Shop Buffalo Ghee
+                  <ArrowRight size={18} className="ml-2" />
+                </Button>
+              </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Process Section */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-14">
+            <span className="inline-block bg-secondary-100 text-secondary-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 uppercase tracking-wide">
+              Our Process
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
+              From Farm to Your Table
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-xl mx-auto text-lg">
+              Every jar of Vashudha Ghee follows our time-tested 4-step traditional process.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((step) => (
+              <div key={step.step} className="relative text-center p-6 rounded-2xl border border-primary-100 hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary-500 text-white text-xl font-bold mb-4">
+                  {step.step}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{step.title}</h3>
+                <p className="text-gray-600 text-sm">{step.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-gradient-to-br from-primary-50 to-amber-50">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <p className="text-primary-600 font-semibold text-sm uppercase tracking-widest mb-2">Testimonials</p>
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4">
+          <div className="text-center mb-14">
+            <span className="inline-block bg-primary-100 text-primary-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 uppercase tracking-wide">
+              Testimonials
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
               What Our Customers Say
             </h2>
-            <p className="text-gray-600 max-w-xl mx-auto">
-              Thousands of happy families trust Vashudha Ghee for their daily needs.
-            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-gray-50 rounded-2xl p-6 shadow-soft hover:shadow-md transition-shadow">
-                {/* Stars */}
+              <div key={i} className="bg-white rounded-2xl p-6 shadow-soft hover:-translate-y-1 transition-all duration-300">
                 <div className="flex gap-1 mb-4">
-                  {[...Array(t.rating)].map((_, j) => (
-                    <Star key={j} size={16} className="fill-yellow-400 text-yellow-400" />
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} size={16} className="text-primary-500 fill-primary-400" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed italic">&quot;{t.text}&quot;</p>
+                <p className="text-gray-600 italic mb-4">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary-200 flex items-center justify-center text-primary-700 font-bold text-lg">
+                  <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-lg">
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-800">{t.name}</div>
-                    <div className="text-gray-500 text-sm">{t.location}</div>
+                    <p className="font-semibold text-gray-900">{t.name}</p>
+                    <p className="text-sm text-gray-500">{t.location}</p>
                   </div>
                 </div>
               </div>
@@ -406,26 +401,28 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Banner Section */}
-      <section className="py-16 bg-primary-600 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-primary-500 rounded-full opacity-50 -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-60 h-60 bg-primary-700 rounded-full opacity-40 translate-y-1/2 -translate-x-1/4" />
-        <div className="container-custom text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">
+      {/* CTA Section */}
+      <section className="py-20 bg-primary-500 text-white">
+        <div className="container-custom text-center">
+          <div className="flex justify-center mb-6">
+            <h2 className="text-4xl font-bold font-heading">Vashudha Ghee</h2>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Experience Pure Ghee?
           </h2>
           <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
-            Join 10,000+ happy families who trust Vashudha Ghee for pure, authentic taste every day.
+            Join thousands of happy customers who trust Vashudha Ghee for pure, authentic,
+            and naturally made desi ghee delivered to their doorstep.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/products">
-              <Button variant="secondary" size="lg" className="shadow-lg">
-                Shop Now
+              <Button variant="secondary" size="lg">
+                Browse Products
                 <ArrowRight size={20} className="ml-2" />
               </Button>
             </Link>
             <Link to="/about">
-              <Button variant="outline-white" size="lg">
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary-600">
                 Our Story
               </Button>
             </Link>
