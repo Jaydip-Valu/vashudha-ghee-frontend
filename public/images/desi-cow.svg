@@ -1,0 +1,131 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8E1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFF3CD;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="cowGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </radialGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#8D6E1A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="500" fill="url(#bg)"/>
+  
+  <!-- Sun/background glow -->
+  <circle cx="400" cy="200" r="180" fill="#FFF9C4" opacity="0.5"/>
+  <circle cx="400" cy="200" r="140" fill="#FFF59D" opacity="0.4"/>
+  
+  <!-- Ground -->
+  <ellipse cx="400" cy="420" rx="380" ry="60" fill="#DCEDC8" opacity="0.7"/>
+  <rect x="0" y="400" width="800" height="100" fill="#C5E1A5" opacity="0.5"/>
+
+  <!-- Grass -->
+  <g opacity="0.7">
+    <path d="M50 400 Q55 375 60 400" stroke="#66BB6A" stroke-width="3" fill="none"/>
+    <path d="M65 400 Q68 378 73 400" stroke="#4CAF50" stroke-width="2.5" fill="none"/>
+    <path d="M80 405 Q84 382 88 405" stroke="#66BB6A" stroke-width="2" fill="none"/>
+    <path d="M700 400 Q705 378 710 400" stroke="#66BB6A" stroke-width="3" fill="none"/>
+    <path d="M715 405 Q720 380 725 405" stroke="#4CAF50" stroke-width="2.5" fill="none"/>
+    <path d="M730 400 Q734 382 738 400" stroke="#66BB6A" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- Cow body -->
+  <g filter="url(#softShadow)">
+    <!-- Body -->
+    <ellipse cx="400" cy="310" rx="140" ry="90" fill="url(#cowGrad)" stroke="#BDBDBD" stroke-width="1.5"/>
+    
+    <!-- Black patches -->
+    <ellipse cx="360" cy="280" rx="45" ry="30" fill="#424242" opacity="0.85"/>
+    <ellipse cx="440" cy="330" rx="38" ry="25" fill="#424242" opacity="0.8"/>
+    <ellipse cx="395" cy="360" rx="28" ry="20" fill="#616161" opacity="0.7"/>
+    
+    <!-- Head -->
+    <ellipse cx="250" cy="290" rx="65" ry="55" fill="#EEEEEE" stroke="#BDBDBD" stroke-width="1.5"/>
+    
+    <!-- Head patch -->
+    <ellipse cx="240" cy="270" rx="30" ry="22" fill="#424242" opacity="0.75"/>
+    
+    <!-- Snout/muzzle -->
+    <ellipse cx="200" cy="310" rx="38" ry="28" fill="#FFCC80" stroke="#BDBDBD" stroke-width="1"/>
+    <circle cx="192" cy="308" r="6" fill="#5D4037"/>
+    <circle cx="208" cy="308" r="6" fill="#5D4037"/>
+    
+    <!-- Eyes -->
+    <circle cx="240" cy="275" r="9" fill="#4E342E"/>
+    <circle cx="242" cy="273" r="3" fill="white" opacity="0.6"/>
+    
+    <!-- Horns -->
+    <path d="M265 245 Q258 210 248 200 Q252 195 262 198 Q270 215 275 245" fill="#FFCC80" stroke="#FFB300" stroke-width="1"/>
+    <path d="M295 240 Q295 205 302 195 Q307 197 308 203 Q302 215 302 240" fill="#FFCC80" stroke="#FFB300" stroke-width="1"/>
+    
+    <!-- Ears -->
+    <ellipse cx="222" cy="250" rx="18" ry="12" fill="#FFCC80" stroke="#BDBDBD" stroke-width="1" transform="rotate(-20 222 250)"/>
+    <ellipse cx="313" cy="248" rx="18" ry="12" fill="#FFCC80" stroke="#BDBDBD" stroke-width="1" transform="rotate(15 313 248)"/>
+    
+    <!-- Neck connection -->
+    <path d="M285 310 Q305 300 325 295" stroke="#E0E0E0" stroke-width="20" fill="none" stroke-linecap="round"/>
+    
+    <!-- Legs -->
+    <rect x="300" y="385" width="26" height="65" rx="10" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="1"/>
+    <rect x="340" y="385" width="26" height="65" rx="10" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="1"/>
+    <rect x="430" y="385" width="26" height="65" rx="10" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="1"/>
+    <rect x="470" y="385" width="26" height="65" rx="10" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="1"/>
+    
+    <!-- Hooves -->
+    <rect x="300" y="445" width="26" height="12" rx="4" fill="#616161"/>
+    <rect x="340" y="445" width="26" height="12" rx="4" fill="#616161"/>
+    <rect x="430" y="445" width="26" height="12" rx="4" fill="#616161"/>
+    <rect x="470" y="445" width="26" height="12" rx="4" fill="#616161"/>
+    
+    <!-- Udder -->
+    <ellipse cx="400" cy="395" rx="40" ry="22" fill="#FFCCBC" stroke="#FFAB91" stroke-width="1"/>
+    <circle cx="385" cy="412" r="5" fill="#FF8A65"/>
+    <circle cx="400" cy="415" r="5" fill="#FF8A65"/>
+    <circle cx="415" cy="412" r="5" fill="#FF8A65"/>
+    
+    <!-- Tail -->
+    <path d="M535 300 Q570 340 555 380 Q548 395 540 385" stroke="#9E9E9E" stroke-width="4" fill="none"/>
+    <ellipse cx="540" cy="387" rx="12" ry="8" fill="#757575"/>
+    
+    <!-- Bell/collar -->
+    <path d="M290 305 Q310 290 330 295 Q325 308 320 312 Q305 315 290 305" fill="#FFD54F" stroke="#F9A825" stroke-width="1"/>
+    <circle cx="310" cy="308" r="5" fill="#F9A825"/>
+    
+    <!-- Milk pot/bucket suggestion -->
+    <g opacity="0.9">
+      <rect x="560" y="350" width="55" height="65" rx="6" fill="#B0BEC5" stroke="#90A4AE" stroke-width="1.5"/>
+      <ellipse cx="587" cy="350" rx="27" ry="8" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1.5"/>
+      <!-- Milk inside -->
+      <ellipse cx="587" cy="350" rx="24" ry="6" fill="white" opacity="0.8"/>
+      <!-- Handle -->
+      <path d="M560 365 Q545 365 545 378 Q545 392 560 392" stroke="#90A4AE" stroke-width="3" fill="none"/>
+    </g>
+  </g>
+
+  <!-- Text labels -->
+  <text x="400" y="60" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#E65100" text-anchor="middle">A2 Desi Cow Milk</text>
+  <text x="400" y="95" font-family="Arial, sans-serif" font-size="16" fill="#795548" text-anchor="middle">From our grass-fed Gir cows</text>
+  
+  <!-- Decorative flowers -->
+  <g opacity="0.7">
+    <circle cx="100" cy="350" r="12" fill="#FFD54F"/>
+    <circle cx="88" cy="342" r="8" fill="#FFCC02"/>
+    <circle cx="112" cy="342" r="8" fill="#FFCC02"/>
+    <circle cx="100" cy="330" r="8" fill="#FFCC02"/>
+    <circle cx="112" cy="358" r="8" fill="#FFCC02"/>
+    <circle cx="88" cy="358" r="8" fill="#FFCC02"/>
+    <circle cx="100" cy="350" r="8" fill="#FFF9C4"/>
+    
+    <circle cx="690" cy="350" r="12" fill="#FFD54F"/>
+    <circle cx="678" cy="342" r="8" fill="#FFCC02"/>
+    <circle cx="702" cy="342" r="8" fill="#FFCC02"/>
+    <circle cx="690" cy="330" r="8" fill="#FFCC02"/>
+    <circle cx="702" cy="358" r="8" fill="#FFCC02"/>
+    <circle cx="678" cy="358" r="8" fill="#FFCC02"/>
+    <circle cx="690" cy="350" r="8" fill="#FFF9C4"/>
+  </g>
+</svg>
