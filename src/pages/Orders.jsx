@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Package, Clock, CheckCircle, XCircle } from 'lucide-react'
 import SEO from '@/components/Common/SEO'
 import Loading from '@/components/Common/Loading'
@@ -8,6 +9,7 @@ import orderService from '@/services/order.service'
 import toast from 'react-hot-toast'
 
 const Orders = () => {
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -25,6 +27,18 @@ const Orders = () => {
       console.error(error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleCancelOrder = async (orderId) => {
+    if (!window.confirm('Are you sure you want to cancel this order?')) return
+    try {
+      await orderService.cancelOrder(orderId)
+      toast.success('Order cancelled successfully')
+      fetchOrders()
+    } catch (error) {
+      toast.error('Failed to cancel order')
+      console.error(error)
     }
   }
 
@@ -67,7 +81,7 @@ const Orders = () => {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="font-semibold text-lg">
-                      Order #{order.orderNumber || order._id.slice(-8).toUpperCase()}
+                      Order #{order.orderNumber || String(order._id).slice(-8).toUpperCase()}
                     </h3>
                     <p className="text-sm text-gray-600">
                       Placed on {formatDate(order.createdAt)}
@@ -75,8 +89,8 @@ const Orders = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     {getStatusIcon(order.status)}
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${ORDER_STATUS_COLORS[order.status]}`}>
-                      {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${ORDER_STATUS_COLORS[order.status] || 'bg-gray-100 text-gray-800'}`}>
+                      {order.status ? order.status.charAt(0).toUpperCase() + order.status.slice(1) : 'Unknown'}
                     </span>
                   </div>
                 </div>
@@ -104,9 +118,17 @@ const Orders = () => {
                     </p>
                   </div>
                   <div className="flex space-x-2">
-                    <button className="btn-outline">View Details</button>
+                    <button
+                      className="btn-outline"
+                      onClick={() => navigate(`/orders/${order._id}`)}
+                    >
+                      View Details
+                    </button>
                     {order.status === 'pending' && (
-                      <button className="btn text-red-500 border-red-500 hover:bg-red-50">
+                      <button
+                        className="btn text-red-500 border-red-500 hover:bg-red-50"
+                        onClick={() => handleCancelOrder(order._id)}
+                      >
                         Cancel Order
                       </button>
                     )}

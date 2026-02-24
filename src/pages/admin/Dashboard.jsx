@@ -19,8 +19,13 @@ const Dashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const data = await orderService.getOrderStats()
-      setStats(data)
+      const data = await orderService.getDashboardStats()
+      setStats({
+        totalOrders: data.total_orders ?? data.totalOrders ?? 0,
+        totalRevenue: data.total_revenue ?? data.totalRevenue ?? 0,
+        totalProducts: data.total_products ?? data.totalProducts ?? 0,
+        totalCustomers: data.total_customers ?? data.totalCustomers ?? 0,
+      })
     } catch (error) {
       console.error(error)
     }
