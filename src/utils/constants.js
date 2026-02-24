@@ -36,14 +36,21 @@ export const PAYMENT_METHODS = {
   COD: 'cod',
 }
 
-// Product Categories
+// Product Categories — values match the Rails backend enum keys
 export const PRODUCT_CATEGORIES = [
-  'Pure Cow Ghee',
-  'A2 Cow Ghee',
-  'Buffalo Ghee',
-  'Organic Ghee',
-  'Flavored Ghee',
+  { value: 'pure_ghee', label: 'Pure Cow Ghee' },
+  { value: 'a2_cow_ghee', label: 'A2 Cow Ghee' },
+  { value: 'buffalo_ghee', label: 'Buffalo Ghee' },
+  { value: 'organic_ghee', label: 'Organic Ghee' },
+  { value: 'flavored_ghee', label: 'Flavored Ghee' },
+  { value: 'combo_pack', label: 'Combo Pack' },
+  { value: 'gift_pack', label: 'Gift Pack' },
 ]
+
+// Quick lookup: enum key → display label
+export const CATEGORY_LABEL_MAP = Object.fromEntries(
+  PRODUCT_CATEGORIES.map((c) => [c.value, c.label])
+)
 
 // Sort Options
 export const SORT_OPTIONS = [

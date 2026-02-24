@@ -15,10 +15,10 @@ const EMPTY_FORM = {
   description: '',
   category: '',
   price: '',
-  mrp: '',
+  discountPercentage: '',
+  sku: '',
   stock: '',
   weight: '',
-  unit: 'gm',
   isFeatured: false,
   isActive: true,
 }
@@ -30,11 +30,11 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     description: product.description || '',
     category: product.category || '',
     price: product.price ?? '',
-    mrp: product.mrp ?? '',
-    stock: product.stock ?? '',
+    discountPercentage: product.discountPercentage ?? product.discount_percentage ?? '',
+    sku: product.sku || '',
+    stock: product.stock ?? product.stock_quantity ?? '',
     weight: product.weight ?? '',
-    unit: product.unit || 'gm',
-    isFeatured: product.isFeatured || false,
+    isFeatured: product.isFeatured || product.featured || false,
     isActive: product.isActive !== false,
   } : { ...EMPTY_FORM })
   const [errors, setErrors] = useState({})
@@ -56,9 +56,13 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     if (!form.category) e.category = 'Category is required'
     if (!form.price || isNaN(Number(form.price)) || Number(form.price) <= 0)
       e.price = 'Enter a valid price'
-    if (form.mrp && (isNaN(Number(form.mrp)) || Number(form.mrp) <= 0))
-      e.mrp = 'Enter a valid MRP'
-    if (!form.stock || isNaN(Number(form.stock)) || Number(form.stock) < 0)
+    if (!form.sku.trim()) e.sku = 'SKU is required'
+    if (form.discountPercentage !== '') {
+      const disc = Number(form.discountPercentage)
+      if (isNaN(disc) || disc < 0 || disc > 100)
+        e.discountPercentage = 'Discount must be between 0 and 100'
+    }
+    if (form.stock === '' || isNaN(Number(form.stock)) || Number(form.stock) < 0)
       e.stock = 'Enter a valid stock quantity'
     return e
   }
@@ -104,39 +108,26 @@ const ProductModal = ({ product, onClose, onSaved }) => {
     const validationErrors = validate()
     if (Object.keys(validationErrors).length) { setErrors(validationErrors); return }
 
-    const payload = {
-      name: form.name.trim(),
-      description: form.description.trim(),
-      category: form.category,
-      price: Number(form.price),
-      mrp: form.mrp ? Number(form.mrp) : undefined,
-      stock: Number(form.stock),
-      weight: form.weight ? Number(form.weight) : undefined,
-      unit: form.unit,
-      isFeatured: form.isFeatured,
-      isActive: form.isActive,
-    }
-
     try {
       setSaving(true)
-      let productId = product?._id
+      let savedId = product?.id || product?._id
 
       if (isEdit) {
-        await productService.updateProduct(productId, payload)
+        await productService.updateProduct(savedId, form)
         toast.success('Product updated successfully')
       } else {
-        const result = await productService.createProduct(payload)
-        // Support both `{ _id }` and `{ product: { _id } }` API response shapes
-        productId = result?.product?._id || result?._id
+        const result = await productService.createProduct(form)
+        // Support both { product: { id } } and flat { id } response shapes
+        savedId = result?.product?.id || result?.product?._id || result?.id || result?._id
         toast.success('Product created successfully')
       }
 
-      // Upload images if any were selected
-      if (newFiles.length > 0 && productId) {
+      // Upload image if one was selected
+      if (newFiles.length > 0 && savedId) {
         const formData = new FormData()
         newFiles.forEach((file) => formData.append('images', file))
-        await productService.uploadImages(productId, formData)
-        toast.success('Images uploaded successfully')
+        await productService.uploadImages(savedId, formData)
+        toast.success('Image uploaded successfully')
       }
 
       onSaved()
@@ -200,8 +191,8 @@ const ProductModal = ({ product, onClose, onSaved }) => {
               className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${errors.category ? 'border-red-500' : 'border-gray-300'}`}
             >
               <option value="">Select category</option>
-              {PRODUCT_CATEGORIES.map((category) => (
-                <option key={category} value={category}>{category}</option>
+              {PRODUCT_CATEGORIES.map((cat) => (
+                <option key={cat.value} value={cat.value}>{cat.label}</option>
               ))}
             </select>
             {errors.category && (
@@ -222,69 +213,61 @@ const ProductModal = ({ product, onClose, onSaved }) => {
               placeholder="e.g. 499"
             />
             <Input
-              label="MRP (₹)"
-              name="mrp"
+              label="Discount %"
+              name="discountPercentage"
               type="number"
               min="0"
+              max="100"
               step="0.01"
-              value={form.mrp}
+              value={form.discountPercentage}
               onChange={handleChange}
-              error={errors.mrp}
-              placeholder="e.g. 599"
+              error={errors.discountPercentage}
+              placeholder="e.g. 10"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="Stock Quantity *"
-              name="stock"
+              label="SKU *"
+              name="sku"
+              value={form.sku}
+              onChange={handleChange}
+              error={errors.sku}
+              placeholder="e.g. VG-COW-500"
+            />
+            <Input
+              label="Weight (grams)"
+              name="weight"
               type="number"
               min="0"
-              value={form.stock}
+              step="0.01"
+              value={form.weight}
               onChange={handleChange}
-              error={errors.stock}
-              placeholder="e.g. 50"
+              placeholder="e.g. 500"
             />
-            <div className="grid grid-cols-2 gap-2">
-              <Input
-                label="Weight"
-                name="weight"
-                type="number"
-                min="0"
-                step="0.01"
-                value={form.weight}
-                onChange={handleChange}
-                placeholder="e.g. 500"
-              />
-              <div className="w-full">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Unit
-                </label>
-                <select
-                  name="unit"
-                  value={form.unit}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                >
-                  <option value="gm">gm</option>
-                  <option value="kg">kg</option>
-                  <option value="ml">ml</option>
-                  <option value="L">L</option>
-                </select>
-              </div>
-            </div>
           </div>
+
+          <Input
+            label="Stock Quantity *"
+            name="stock"
+            type="number"
+            min="0"
+            value={form.stock}
+            onChange={handleChange}
+            error={errors.stock}
+            placeholder="e.g. 50"
+          />
 
           {/* ── Product Images ── */}
           <div className="w-full">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Product Images
+              Product Image
             </label>
 
             {/* Existing images (edit mode) */}
             {existingImages.length > 0 && (
               <div className="mb-3">
-                <p className="text-xs text-gray-500 mb-2">Current images:</p>
+                <p className="text-xs text-gray-500 mb-2">Current image:</p>
                 <div className="flex flex-wrap gap-2">
                   {existingImages.map((img, i) => (
                     <div key={i} className="relative w-16 h-16 rounded-lg overflow-hidden border border-gray-200">
@@ -326,10 +309,10 @@ const ProductModal = ({ product, onClose, onSaved }) => {
             >
               <ImagePlus size={28} className="text-gray-400" />
               <span className="text-sm text-gray-500">
-                Click to browse and select images
+                Click to browse and select an image
               </span>
               <span className="text-xs text-gray-400">
-                JPEG, PNG, WebP — max 5 MB each
+                JPEG, PNG, WebP — max 5 MB
               </span>
             </button>
             <input
@@ -539,13 +522,13 @@ const ProductsManagement = () => {
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-gray-600">{product.category}</td>
+                        <td className="px-6 py-4 text-gray-600">{product.categoryLabel || product.category}</td>
                         <td className="px-6 py-4">
                           <div>
                             <span className="font-semibold">{formatCurrency(product.price)}</span>
-                            {product.mrp && product.mrp > product.price && (
+                            {product.originalPrice && product.originalPrice > product.price && (
                               <span className="text-xs text-gray-400 line-through ml-1">
-                                {formatCurrency(product.mrp)}
+                                {formatCurrency(product.originalPrice)}
                               </span>
                             )}
                           </div>

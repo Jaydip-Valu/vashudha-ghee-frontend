@@ -61,15 +61,15 @@ const ProductFilter = ({ filters, onFilterChange, onReset }) => {
         <div className="mb-6">
           <h4 className="font-medium text-gray-800 mb-3">Categories</h4>
           <div className="space-y-2">
-            {PRODUCT_CATEGORIES.map((category) => (
-              <label key={category} className="flex items-center cursor-pointer">
+            {PRODUCT_CATEGORIES.map((cat) => (
+              <label key={cat.value} className="flex items-center cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={filters.category === category}
-                  onChange={() => handleCategoryChange(category)}
+                  checked={filters.category === cat.value}
+                  onChange={() => handleCategoryChange(cat.value)}
                   className="w-4 h-4 text-primary-500 border-gray-300 rounded focus:ring-primary-500"
                 />
-                <span className="ml-2 text-gray-700">{category}</span>
+                <span className="ml-2 text-gray-700">{cat.label}</span>
               </label>
             ))}
           </div>

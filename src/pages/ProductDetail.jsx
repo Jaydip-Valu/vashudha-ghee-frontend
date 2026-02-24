@@ -143,7 +143,7 @@ const ProductDetail = () => {
           {/* Details */}
           <div>
             <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-              {product.category}
+              {product.categoryLabel || product.category}
             </p>
             <h1 className="text-3xl font-bold font-heading mb-4">
               {product.name}
@@ -317,7 +317,7 @@ const ProductDetail = () => {
                       {product.category && (
                         <tr className="border-b">
                           <td className="px-6 py-3 font-medium text-gray-600 bg-gray-50 w-1/3">Category</td>
-                          <td className="px-6 py-3 text-gray-900">{product.category}</td>
+                          <td className="px-6 py-3 text-gray-900">{product.categoryLabel || product.category}</td>
                         </tr>
                       )}
                       {product.sku && (

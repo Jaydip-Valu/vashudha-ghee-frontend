@@ -48,7 +48,7 @@ const ProductCard = ({ product }) => {
       <div className="p-4">
         {/* Category */}
         <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
-          {product.category}
+          {product.categoryLabel || product.category}
         </p>
 
         {/* Name */}
