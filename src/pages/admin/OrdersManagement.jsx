@@ -98,7 +98,7 @@ const OrdersManagement = () => {
                   {orders.map((order) => (
                     <tr key={order._id}>
                       <td className="px-6 py-4 font-medium">
-                        #{order.orderNumber || order._id.slice(-8).toUpperCase()}
+                        #{order.orderNumber || String(order._id).slice(-8).toUpperCase()}
                       </td>
                       <td className="px-6 py-4">
                         <div>

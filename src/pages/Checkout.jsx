@@ -22,12 +22,25 @@ const Checkout = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true)
-      
+
       const orderData = {
-        shippingAddress: data,
-        items: cartItems,
-        totalAmount,
-        paymentMethod: data.paymentMethod,
+        shipping_address: {
+          full_name: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+          city: data.city,
+          state: data.state,
+          pincode: data.pincode,
+          country: data.country || 'India',
+        },
+        items: cartItems.map((item) => ({
+          product_id: item.id || item._id,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        total_amount: totalAmount,
+        payment_method: data.paymentMethod,
       }
 
       if (data.paymentMethod === 'razorpay') {
@@ -54,13 +67,17 @@ const Checkout = () => {
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: razorpayOrder.amount,
-      currency: razorpayOrder.currency,
+      currency: razorpayOrder.currency || 'INR',
       name: 'Vashudha Ghee',
       description: 'Order Payment',
       order_id: razorpayOrder.id,
       handler: async (response) => {
         try {
-          await paymentService.verifyRazorpayPayment(response)
+          await paymentService.verifyRazorpayPayment({
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          })
           dispatch(clearCart())
           toast.success('Order placed successfully!')
           navigate('/orders')
@@ -69,9 +86,9 @@ const Checkout = () => {
         }
       },
       prefill: {
-        name: orderData.shippingAddress.fullName,
-        email: orderData.shippingAddress.email,
-        contact: orderData.shippingAddress.phone,
+        name: orderData.shipping_address.full_name,
+        email: orderData.shipping_address.email,
+        contact: orderData.shipping_address.phone,
       },
     }
 
