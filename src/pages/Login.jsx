@@ -1,27 +1,47 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCredentials } from '@/store/authSlice'
+import { selectCartItems } from '@/store/cartSlice'
 import Button from '@/components/Common/Button'
 import Input from '@/components/Common/Input'
 import SEO from '@/components/Common/SEO'
 import authService from '@/services/auth.service'
+import cartService from '@/services/cart.service'
 import toast from 'react-hot-toast'
 
 const Login = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const dispatch = useDispatch()
+  const localCartItems = useSelector(selectCartItems)
   const [loading, setLoading] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
+
+  const syncCartToBackend = async (items) => {
+    if (!items || items.length === 0) return
+    try {
+      for (const item of items) {
+        const productId = item.id || item._id
+        if (productId) {
+          await cartService.addToCart(productId, item.quantity)
+        }
+      }
+    } catch (error) {
+      console.error('Failed to sync cart:', error)
+    }
+  }
 
   const onSubmit = async (data) => {
     try {
       setLoading(true)
       const response = await authService.login(data)
       dispatch(setCredentials({ user: response.user, token: response.token }))
+      await syncCartToBackend(localCartItems)
       toast.success('Login successful!')
-      navigate('/')
+      const from = location.state?.from?.pathname || '/'
+      navigate(from, { replace: true })
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed')
     } finally {

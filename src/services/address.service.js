@@ -1,15 +1,9 @@
 import api from './api'
 
 export const addressService = {
-  // Get all addresses for the current user
+  // Get all addresses for current user
   getAddresses: async () => {
     const response = await api.get('/users/addresses')
-    return response.data.addresses
-  },
-
-  // Get a single address by ID
-  getAddress: async (id) => {
-    const response = await api.get(`/users/addresses/${id}`)
     return response.data
   },
 
@@ -19,7 +13,7 @@ export const addressService = {
     return response.data
   },
 
-  // Update an existing address
+  // Update an address
   updateAddress: async (id, addressData) => {
     const response = await api.patch(`/users/addresses/${id}`, { address: addressData })
     return response.data
@@ -31,8 +25,8 @@ export const addressService = {
     return response.data
   },
 
-  // Set an address as the default
-  setDefaultAddress: async (id) => {
+  // Set an address as default
+  setDefault: async (id) => {
     const response = await api.patch(`/users/addresses/${id}/set_default`)
     return response.data
   },
