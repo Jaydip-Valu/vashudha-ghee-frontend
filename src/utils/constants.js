@@ -1,5 +1,5 @@
 // API Endpoints
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3009/api'
+export const API_URL = import.meta.env.VITE_API_URL || 'https://vashudha-ghee-backend.onrender.com/api/v1'
 
 // App Config
 export const APP_NAME = import.meta.env.VITE_APP_NAME || 'Vashudha Ghee'

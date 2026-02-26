@@ -58,7 +58,7 @@ frontend/
 
    Update the `.env` file with your configuration:
    ```
-   VITE_API_URL=http://localhost:3009
+   VITE_API_URL=https://vashudha-ghee-backend.onrender.com/
    VITE_APP_NAME=Vashudha Ghee
    VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
    ```

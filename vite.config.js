@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
     proxy: {
       '/api': {
-        target: mode === 'development' ? 'http://localhost:3009' : 'http://localhost:3009',
+        target: mode === 'development' ? 'https://vashudha-ghee-backend.onrender.com/api/v1' : 'https://vashudha-ghee-backend.onrender.com/api/v1',
         changeOrigin: true,
       },
     },
