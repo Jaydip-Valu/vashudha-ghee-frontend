@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ShoppingBag, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle } from 'lucide-react'
+import { ArrowRight, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle, Flame, Brain, Zap, Moon, ChevronDown, ChevronUp } from 'lucide-react'
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
 import ProductCard from '@/components/Product/ProductCard'
@@ -8,18 +8,14 @@ import productService from '@/services/product.service'
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([])
-  const [productsLoading, setProductsLoading] = useState(true)
 
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
-        setProductsLoading(true)
         const data = await productService.getProducts({ limit: 4, sort: 'newest' })
         setFeaturedProducts((data.products || data).slice(0, 4))
       } catch {
         setFeaturedProducts([])
-      } finally {
-        setProductsLoading(false)
       }
     }
     fetchFeatured()
@@ -106,12 +102,70 @@ const Home = () => {
     }
   ]
 
+  const healthBenefits = [
+    {
+      icon: Flame,
+      title: 'Boosts Metabolism',
+      description: 'Rich in medium-chain fatty acids that improve metabolism and support healthy weight management.'
+    },
+    {
+      icon: Brain,
+      title: 'Enhances Brain Function',
+      description: 'Contains essential fats that nourish the brain and support cognitive health, memory, and focus.'
+    },
+    {
+      icon: Heart,
+      title: 'Supports Heart Health',
+      description: 'Balanced omega-3 and omega-6 fatty acids promote cardiovascular health and reduce inflammation.'
+    },
+    {
+      icon: Zap,
+      title: 'Improves Digestion',
+      description: 'Bilona ghee stimulates digestive enzymes, improves gut health, and helps absorb fat-soluble vitamins.'
+    },
+    {
+      icon: Moon,
+      title: 'Ayurvedic Superfood',
+      description: 'Revered in Ayurveda for thousands of years as a rasayana — a rejuvenator and longevity tonic.'
+    },
+    {
+      icon: Shield,
+      title: 'Boosts Immunity',
+      description: 'Loaded with antioxidants and fat-soluble vitamins A, D, E & K that strengthen your immune system.'
+    },
+  ]
+
+  const homeFaqs = [
+    {
+      question: 'What makes Vashudha Ghee different from regular ghee?',
+      answer: 'Vashudha Ghee is made using the traditional Bilona (Valona) method — curd is hand-churned to extract pure butter, which is then slow-cooked. This preserves all the natural nutrients, enzymes, and aroma that are lost in industrial ghee manufacturing. We source milk only from indigenous A2 desi cows and buffaloes that graze freely on natural pastures.'
+    },
+    {
+      question: 'What is A2 Desi Cow Ghee?',
+      answer: 'A2 ghee is made from the milk of indigenous Indian cows (like Gir, Sahiwal, Tharparkar) that naturally produce A2 beta-casein protein. This protein is easier to digest and is associated with better health outcomes compared to A1 protein found in milk of exotic breeds. Our A2 Desi Cow Ghee is 100% authentic — no A1 milk is ever mixed.'
+    },
+    {
+      question: 'What is the Bilona / Valona Paddhati method?',
+      answer: 'Bilona (also called Valona Paddhati) is the ancient Indian method of making ghee: fresh milk is boiled and cooled, converted to curd with a natural starter, the curd is then hand-churned using a wooden churner (bilona) to separate butter (makhan), and the butter is slow-cooked on low flame until it transforms into pure golden ghee. This process retains all medicinal properties of ghee as described in Ayurveda.'
+    },
+    {
+      question: 'Do you add any preservatives or chemicals?',
+      answer: 'Absolutely not. Vashudha Ghee contains only one ingredient: pure ghee. No preservatives, no artificial color, no additives, and no chemicals. Our traditional preparation process naturally preserves the ghee for up to 12 months without any chemical intervention.'
+    },
+    {
+      question: 'Is Vashudha Ghee suitable for lactose intolerant people?',
+      answer: 'Yes! Pure ghee made by the Bilona method is generally safe for people with lactose intolerance. During the churning and cooking process, milk solids (casein and lactose) are separated and removed. What remains is nearly pure clarified butter fat with negligible lactose content. However, if you have a severe dairy allergy, please consult your physician.'
+    },
+  ]
+
+  const [openFaq, setOpenFaq] = useState(null)
+
   return (
     <>
       <SEO
-        title="Home - Premium Pure Desi Ghee"
-        description="Experience the authentic taste of traditional Indian ghee. Made from the finest quality A2 cow milk using time-honored bilona methods. 100% pure, natural, and healthy."
-        keywords="ghee, desi ghee, pure ghee, organic ghee, A2 ghee, cow ghee, buffalo ghee, premium ghee, traditional ghee, Indian ghee, bilona ghee"
+        title="Buy Pure A2 Desi Cow Ghee & Buffalo Ghee Online | Bilona Method"
+        description="Shop 100% pure A2 Desi Cow Ghee & Buffalo Bilona Ghee online. Made using traditional Valona Paddhati method. No preservatives, farm fresh, free delivery across India."
+        keywords="A2 Desi Cow Ghee, Bilona Ghee, Valona Paddhati Ghee, Pure Buffalo Ghee, Organic Ghee Online India, buy ghee online, desi ghee, traditional ghee, pure ghee India"
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
@@ -366,6 +420,78 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Health Benefits Section */}
+      <section className="py-20 bg-gradient-to-br from-amber-50 via-white to-green-50">
+        <div className="container-custom">
+          <div className="text-center mb-14">
+            <span className="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 uppercase tracking-wide">
+              🌿 Ayurvedic Benefits
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
+              Health Benefits of Bilona Ghee
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-lg">
+              Traditional Bilona ghee has been revered in Ayurveda for thousands of years.
+              Modern science now confirms what our ancestors always knew.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {healthBenefits.map((benefit, index) => {
+              const Icon = benefit.icon
+              return (
+                <div key={index} className="bg-white rounded-2xl p-6 shadow-soft hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 text-green-600 mb-4">
+                    <Icon size={26} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
+                </div>
+              )
+            })}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/products">
+              <Button size="lg">
+                Shop Bilona Ghee Now
+                <ArrowRight size={18} className="ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      {featuredProducts.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="container-custom">
+            <div className="text-center mb-14">
+              <span className="inline-block bg-primary-100 text-primary-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 uppercase tracking-wide">
+                Our Products
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
+                Premium Ghee Collection
+              </h2>
+              <p className="text-gray-500 mt-3 max-w-xl mx-auto text-lg">
+                Handcrafted with love using the ancient Bilona method. Pure, natural, and delivered fresh to your door.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <Link to="/products">
+                <Button variant="outline" size="lg">
+                  View All Products
+                  <ArrowRight size={18} className="ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Testimonials Section */}
       <section className="py-20 bg-gradient-to-br from-primary-50 to-amber-50">
         <div className="container-custom">
@@ -397,6 +523,80 @@ const Home = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section className="py-16 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-primary-100 text-primary-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 uppercase tracking-wide">
+              🏆 Certifications
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
+              Trusted, Tested & Certified
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-xl mx-auto">
+              Our ghee is lab-tested for purity and safety. You can trust every jar we deliver.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { badge: '🧪', title: 'Lab Tested', desc: 'FSSAI certified lab tested for purity & quality standards' },
+              { badge: '🌿', title: 'No Chemicals', desc: 'Zero preservatives, additives or artificial colors — guaranteed' },
+              { badge: '🐄', title: 'A2 Verified', desc: 'Sourced exclusively from indigenous A2 desi cow & buffalo milk' },
+              { badge: '📦', title: 'FSSAI Approved', desc: 'Manufacturing facility is FSSAI licensed and regularly audited' },
+            ].map((cert, i) => (
+              <div key={i} className="text-center p-6 rounded-2xl border border-primary-100 hover:shadow-soft transition-all duration-300">
+                <div className="text-4xl mb-3">{cert.badge}</div>
+                <h3 className="font-bold text-gray-900 mb-2">{cert.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{cert.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-br from-amber-50 to-primary-50">
+        <div className="container-custom">
+          <div className="text-center mb-14">
+            <span className="inline-block bg-primary-100 text-primary-700 text-sm font-semibold px-4 py-1 rounded-full mb-3 uppercase tracking-wide">
+              FAQ
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-xl mx-auto">
+              Everything you need to know about Vashudha Ghee and the Bilona method.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto space-y-3">
+            {homeFaqs.map((faq, i) => (
+              <div key={i} className="bg-white rounded-2xl shadow-soft overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition"
+                >
+                  <span className="font-semibold text-gray-900 pr-8">{faq.question}</span>
+                  {openFaq === i
+                    ? <ChevronUp className="text-primary-500 flex-shrink-0" size={22} />
+                    : <ChevronDown className="text-gray-400 flex-shrink-0" size={22} />
+                  }
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-5 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-4">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/faq" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center gap-2">
+              View All FAQs <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
