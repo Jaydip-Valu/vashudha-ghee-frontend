@@ -47,9 +47,9 @@ const Products = () => {
   return (
     <>
       <SEO 
-        title="Products - Browse Our Premium Ghee Collection" 
-        description="Browse our wide range of premium quality pure desi ghee products. A2 Ghee, Cow Ghee, Buffalo Ghee, Organic Ghee and more. Free shipping on orders above ₹500."
-        keywords="buy ghee online, desi ghee online, A2 ghee, cow ghee, buffalo ghee, organic ghee, pure ghee products"
+        title="Buy Pure A2 Desi Cow Ghee & Buffalo Bilona Ghee Online | Vashudha Ghee" 
+        description="Buy 100% pure A2 Desi Cow Ghee, Buffalo Bilona Ghee online at best prices. Made using traditional Valona Paddhati method. Free shipping on orders above ₹500 across India."
+        keywords="A2 Desi Cow Ghee, Bilona Ghee, Valona Paddhati Ghee, Pure Buffalo Ghee, Organic Ghee Online India, buy ghee online, desi ghee online, A2 ghee price"
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'Products', path: '/products' }
@@ -69,9 +69,20 @@ const Products = () => {
           <h1 className="text-3xl md:text-4xl font-bold font-heading mb-2">
             Our Products
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4">
             Discover our premium collection of pure desi ghee
           </p>
+          {/* SEO Content Paragraph */}
+          <div className="bg-amber-50 border border-amber-100 rounded-xl p-5 text-sm text-gray-700 leading-relaxed max-w-4xl">
+            <p>
+              Welcome to Vashudha Ghee — your trusted source for <strong>100% pure A2 Desi Cow Ghee</strong> and{' '}
+              <strong>Buffalo Bilona Ghee</strong> made using the ancient <strong>Valona Paddhati (Bilona Method)</strong>.
+              Every jar is handcrafted from the milk of free-roaming, grass-fed indigenous cows and buffaloes.
+              We never add preservatives, chemicals, or artificial colors. Each batch is lab-tested for purity before it reaches your table.
+              Whether you are looking for <em>Organic Ghee Online India</em>, <em>A2 Desi Cow Ghee</em>, or
+              traditional <em>Pure Buffalo Ghee</em> — you have come to the right place. Free delivery on orders above ₹500.
+            </p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-4 gap-8">

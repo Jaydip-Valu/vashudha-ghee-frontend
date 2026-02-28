@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import { MapPin, Plus } from 'lucide-react'
+import { MapPin, Plus, Shield, Lock, CreditCard, Smartphone, Truck } from 'lucide-react'
 import { selectCartItems, selectCartTotalAmount, clearCart } from '@/store/cartSlice'
 import Button from '@/components/Common/Button'
 import Input from '@/components/Common/Input'
@@ -301,7 +301,10 @@ const Checkout = () => {
 
               {/* Payment Method */}
               <div className="card p-6">
-                <h3 className="font-semibold mb-3">Payment Method</h3>
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
+                  <CreditCard size={20} className="text-primary-500" />
+                  Payment Method
+                </h3>
                 <div className="space-y-2">
                   <label className="flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50">
                     <input
@@ -310,7 +313,13 @@ const Checkout = () => {
                       {...register('paymentMethod', { required: 'Please select a payment method' })}
                       className="mr-3"
                     />
-                    <span>Pay Online (Razorpay)</span>
+                    <div className="flex items-center gap-2">
+                      <CreditCard size={18} className="text-blue-500" />
+                      <div>
+                        <span className="font-medium">Pay Online</span>
+                        <p className="text-xs text-gray-500">UPI, Cards, Net Banking via Razorpay</p>
+                      </div>
+                    </div>
                   </label>
                   <label className="flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50">
                     <input
@@ -319,12 +328,37 @@ const Checkout = () => {
                       {...register('paymentMethod', { required: 'Please select a payment method' })}
                       className="mr-3"
                     />
-                    <span>Cash on Delivery</span>
+                    <div className="flex items-center gap-2">
+                      <Truck size={18} className="text-green-500" />
+                      <div>
+                        <span className="font-medium">Cash on Delivery</span>
+                        <p className="text-xs text-gray-500">Pay when your order arrives</p>
+                      </div>
+                    </div>
                   </label>
                 </div>
                 {errors.paymentMethod && (
                   <p className="mt-1 text-sm text-red-600">{errors.paymentMethod.message}</p>
                 )}
+
+                {/* Security Badges */}
+                <div className="mt-4 pt-4 border-t">
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {[
+                      { icon: Lock, text: '256-bit SSL Secure', color: 'text-green-600' },
+                      { icon: Shield, text: 'PCI DSS Compliant', color: 'text-blue-600' },
+                      { icon: Smartphone, text: 'UPI Supported', color: 'text-purple-600' },
+                    ].map((badge, i) => {
+                      const Icon = badge.icon
+                      return (
+                        <span key={i} className="inline-flex items-center gap-1 text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-3 py-1">
+                          <Icon size={12} className={badge.color} />
+                          {badge.text}
+                        </span>
+                      )
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -364,8 +398,22 @@ const Checkout = () => {
                   loading={loading}
                   className="mt-6"
                 >
-                  Place Order
+                  <Lock size={16} className="mr-2" />
+                  Place Order Securely
                 </Button>
+
+                {/* Checkout Trust Badges */}
+                <div className="mt-4 text-center space-y-2">
+                  <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
+                    <Lock size={12} className="text-green-600" />
+                    <span>Your payment information is encrypted and secure</span>
+                  </div>
+                  <div className="flex justify-center gap-3 text-xs text-gray-400">
+                    <span>✓ 7-Day Returns</span>
+                    <span>✓ Free Delivery</span>
+                    <span>✓ 100% Pure</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
