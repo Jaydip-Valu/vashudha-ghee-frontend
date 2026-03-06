@@ -242,8 +242,8 @@ const Home = () => {
             <div className="relative flex items-center justify-center">
               <div className="absolute -inset-6 bg-gradient-to-br from-amber-200 via-yellow-200 to-amber-300 rounded-3xl opacity-30 blur-3xl"></div>
               <img
-                src="/images/hero-ghee.svg"
-                alt="Pure Desi Ghee - Traditional Indian Brass Ghee Matka with Spoon and Leaves"
+                src="/images/hero-ghee-jar.svg"
+                alt="Pure Desi Ghee - Premium Vashudha Ghee Jar"
                 className="relative rounded-3xl shadow-2xl w-full max-w-lg"
                 loading="eager"
               />
@@ -332,7 +332,7 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/cow.svg"
+                  src="/images/desi-cow.svg"
                   alt="Desi Cow - Source of Pure A2 Cow Ghee"
                   className="relative rounded-2xl shadow-xl w-full max-w-md"
                   loading="lazy"
@@ -409,6 +409,20 @@ const Home = () => {
               Every jar of Vashudha Ghee follows our time-tested 4-step traditional process.
             </p>
           </div>
+
+          {/* Bilona Process Illustration */}
+          <div className="flex justify-center mb-12">
+            <div className="relative max-w-2xl w-full">
+              <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
+              <img
+                src="/images/bilona-process.svg"
+                alt="Traditional Bilona Churning Process - Ancient Indian Ghee Making"
+                className="relative w-full rounded-2xl shadow-premium"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step) => (
               <div key={step.step} className="relative text-center p-6 rounded-2xl border border-primary-100 hover:shadow-soft hover:-translate-y-1 transition-all duration-300">

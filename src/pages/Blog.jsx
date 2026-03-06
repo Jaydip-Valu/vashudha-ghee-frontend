@@ -13,7 +13,7 @@ const blogPosts = [
     readTime: '5 min read',
     author: 'Dr. Priya Sharma',
     date: 'February 15, 2026',
-    image: '/images/hero-ghee.svg',
+    image: '/images/hero-ghee-jar.svg',
     tags: ['A2 Ghee', 'Health Benefits', 'Ayurveda'],
   },
   {
@@ -26,7 +26,7 @@ const blogPosts = [
     readTime: '7 min read',
     author: 'Vashudha Team',
     date: 'January 28, 2026',
-    image: '/images/hero-ghee.svg',
+    image: '/images/bilona-process.svg',
     tags: ['Bilona Method', 'Traditional Process', 'Valona Paddhati'],
   },
   {
@@ -65,7 +65,7 @@ const blogPosts = [
     readTime: '6 min read',
     author: 'Dr. Priya Sharma',
     date: 'December 5, 2025',
-    image: '/images/cow.svg',
+    image: '/images/desi-cow.svg',
     tags: ['A2 Milk', 'A1 vs A2', 'Gir Cow'],
   },
   {

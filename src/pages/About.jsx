@@ -94,8 +94,8 @@ const About = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/hero-ghee.svg"
-                alt="Traditional Bilona ghee making process"
+                src="/images/hero-ghee-jar.svg"
+                alt="Vashudha Ghee — Premium Pure Desi Ghee Jar"
                 className="relative rounded-3xl shadow-premium w-full"
               />
             </div>
@@ -134,6 +134,20 @@ const About = () => {
               natural nutrients, aroma, and Ayurvedic goodness.
             </p>
           </div>
+
+          {/* Bilona Process Illustration */}
+          <div className="flex justify-center mb-12">
+            <div className="relative max-w-2xl w-full">
+              <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
+              <img
+                src="/images/bilona-process.svg"
+                alt="Traditional Bilona Churning Process — Ancient Indian Ghee Making Method"
+                className="relative w-full rounded-2xl shadow-premium"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
             {processSteps.map((step) => (
               <div key={step.step} className="relative text-center p-7 rounded-2xl border border-amber-100 bg-white hover:shadow-premium hover:-translate-y-1 transition-all duration-300">
@@ -210,7 +224,7 @@ const About = () => {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-green-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/cow.svg"
+                src="/images/desi-cow.svg"
                 alt="Gir Cow - Source of A2 Milk for Vashudha Ghee"
                 className="relative rounded-3xl shadow-premium w-full"
               />
