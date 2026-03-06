@@ -13,7 +13,7 @@ const blogPosts = [
     readTime: '5 min read',
     author: 'Dr. Priya Sharma',
     date: 'February 15, 2026',
-    image: '/images/hero.png',
+    image: 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80',
     tags: ['A2 Ghee', 'Health Benefits', 'Ayurveda'],
   },
   {
@@ -39,7 +39,7 @@ const blogPosts = [
     readTime: '6 min read',
     author: 'Nutritionist Anita Desai',
     date: 'January 10, 2026',
-    image: '/images/hero.png',
+    image: 'https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?auto=format&fit=crop&w=800&q=80',
     tags: ['Ghee vs Butter', 'Nutrition', 'Cooking Tips'],
   },
   {
@@ -52,7 +52,7 @@ const blogPosts = [
     readTime: '8 min read',
     author: 'Chef Meena Patel',
     date: 'December 20, 2025',
-    image: '/images/hero.png',
+    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
     tags: ['Recipes', 'Cooking', 'Indian Food'],
   },
   {
@@ -78,7 +78,7 @@ const blogPosts = [
     readTime: '5 min read',
     author: 'Vashudha Team',
     date: 'November 18, 2025',
-    image: '/images/hero.png',
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80',
     tags: ['Weight Loss', 'Metabolism', 'Healthy Fats'],
   },
 ]
