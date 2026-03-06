@@ -57,12 +57,45 @@ const Header = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-              <img
-                src="/images/logo.png"
-                alt="Vashudha Ghee - Pure Desi Ghee"
+            <Link to="/" className="flex items-center flex-shrink-0">
+              <svg
+                viewBox="0 0 220 64"
+                xmlns="http://www.w3.org/2000/svg"
                 className="h-12 md:h-14 w-auto"
-              />
+                aria-label="Vashudha Ghee - Pure Desi Ghee"
+              >
+                {/* Circular emblem */}
+                <circle cx="32" cy="32" r="28" fill="#FFFBEB" stroke="#D97706" strokeWidth="1.5"/>
+                <circle cx="32" cy="32" r="22" fill="none" stroke="#D97706" strokeWidth="0.6" strokeDasharray="2.5 2" opacity="0.5"/>
+                {/* Kalash body */}
+                <path d="M21,42 Q19,50 32,52 Q45,50 43,42 L40,27 Q40,22 32,22 Q24,22 24,27 Z" fill="#D97706"/>
+                {/* Kalash neck */}
+                <rect x="28" y="17" width="8" height="7" rx="2.5" fill="#D97706"/>
+                {/* Kalash mouth rim */}
+                <ellipse cx="32" cy="16.5" rx="7" ry="2" fill="#B45309"/>
+                {/* Mango leaves left */}
+                <path d="M32,17 C28,10 21,10 23,17" fill="#65A30D" opacity="0.9"/>
+                {/* Mango leaves right */}
+                <path d="M32,17 C36,10 43,10 41,17" fill="#65A30D" opacity="0.9"/>
+                {/* Coconut on top */}
+                <circle cx="32" cy="10" r="4" fill="#92400E"/>
+                <circle cx="32" cy="10" r="2" fill="#B45309"/>
+                {/* Ghee shine highlight */}
+                <ellipse cx="27" cy="36" rx="2.5" ry="5" fill="white" opacity="0.25" transform="rotate(-15 27 36)"/>
+                {/* Base decorative dots */}
+                <circle cx="26" cy="48" r="1.2" fill="#92400E" opacity="0.5"/>
+                <circle cx="32" cy="50" r="1.5" fill="#92400E" opacity="0.6"/>
+                <circle cx="38" cy="48" r="1.2" fill="#92400E" opacity="0.5"/>
+
+                {/* Brand name: Vashudha */}
+                <text x="70" y="24" fontFamily="Georgia,'Times New Roman',serif" fontSize="18" fontWeight="700" fill="#78350F" letterSpacing="0.5">Vashudha</text>
+                {/* Brand name: GHEE */}
+                <text x="70" y="44" fontFamily="Georgia,'Times New Roman',serif" fontSize="20" fontWeight="800" fill="#D97706" letterSpacing="3">GHEE</text>
+                {/* Divider line */}
+                <line x1="70" y1="48" x2="185" y2="48" stroke="#D97706" strokeWidth="0.7" opacity="0.4"/>
+                {/* Tagline */}
+                <text x="70" y="58" fontFamily="'Arial Narrow',Arial,sans-serif" fontSize="7" fill="#92400E" letterSpacing="2.5">PURE A2 BILONA GHEE</text>
+              </svg>
             </Link>
 
             {/* Desktop Navigation */}
