@@ -94,7 +94,7 @@ const About = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/hero.png"
+                src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format&fit=crop&w=800&q=80"
                 alt="Vashudha Ghee — Premium Pure Desi Ghee Jar"
                 className="relative rounded-3xl shadow-premium w-full object-cover"
               />
@@ -135,16 +135,40 @@ const About = () => {
             </p>
           </div>
 
-          {/* Bilona Process Illustration */}
-          <div className="flex justify-center mb-12">
-            <div className="relative max-w-2xl w-full">
-              <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
+          {/* Bilona Process Photo Gallery */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            <div className="relative rounded-2xl overflow-hidden shadow-premium aspect-[4/3]">
               <img
-                src="/images/bilona-process.svg"
-                alt="Traditional Bilona Churning Process — Ancient Indian Ghee Making Method"
-                className="relative w-full rounded-2xl shadow-premium"
+                src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80"
+                alt="Fresh milk collection from indigenous desi cows"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p className="text-white text-sm font-semibold">Fresh Milk Collection</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-premium aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=600&q=80"
+                alt="Traditional bilona hand-churning process"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p className="text-white text-sm font-semibold">Bilona Hand-Churning</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-premium aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80"
+                alt="Slow simmering to create pure golden ghee"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p className="text-white text-sm font-semibold">Slow-Cooked to Perfection</p>
+              </div>
             </div>
           </div>
 
@@ -224,7 +248,7 @@ const About = () => {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-green-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/cow.png"
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"
                 alt="Gir Cow - Source of A2 Milk for Vashudha Ghee"
                 className="relative rounded-3xl shadow-premium w-full object-cover"
               />

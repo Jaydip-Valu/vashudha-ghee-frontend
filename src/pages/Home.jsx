@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle, Flame, Brain, Zap, Moon, ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowRight, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle, Flame, Brain, Zap, Moon, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
 import ProductCard from '@/components/Product/ProductCard'
@@ -86,19 +86,22 @@ const Home = () => {
       name: 'Priya Sharma',
       location: 'Mumbai',
       rating: 5,
-      text: 'The best ghee I have ever tasted! The aroma is heavenly and the quality is simply outstanding. My family loves it!'
+      text: 'The best ghee I have ever tasted! The aroma is heavenly and the quality is simply outstanding. My family loves it!',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&h=80&q=80',
     },
     {
       name: 'Rajesh Patel',
       location: 'Ahmedabad',
       rating: 5,
-      text: 'Vashudha Ghee brings back childhood memories. Purely authentic, no artificial taste. Highly recommended!'
+      text: 'Vashudha Ghee brings back childhood memories. Purely authentic, no artificial taste. Highly recommended!',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80',
     },
     {
       name: 'Anita Desai',
       location: 'Surat',
       rating: 5,
-      text: 'The buffalo ghee is absolutely rich and creamy. Perfect for making sweets. Will keep ordering from here!'
+      text: 'The buffalo ghee is absolutely rich and creamy. Perfect for making sweets. Will keep ordering from here!',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&h=80&q=80',
     }
   ]
 
@@ -159,6 +162,54 @@ const Home = () => {
   ]
 
   const [openFaq, setOpenFaq] = useState(null)
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0)
+  const [brokenAvatars, setBrokenAvatars] = useState(new Set())
+
+  const heroSlides = [
+    {
+      badge: '🌿 100% Pure A2 Bilona Ghee',
+      title: 'Pure Desi Ghee',
+      subtitle: 'Made with Love & Tradition',
+      description: 'Experience the authentic taste of traditional Indian ghee. Made from the finest A2 Gir cow & buffalo milk using the time-honored Bilona method.',
+      bgImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80',
+      fallbackBg: 'linear-gradient(135deg, #78350f 0%, #92400e 40%, #d97706 100%)',
+      productImage: 'https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format&fit=crop&w=700&q=80',
+      imageAlt: 'Pure Desi Ghee in glass jar on wooden table',
+    },
+    {
+      badge: '⚙️ Traditional Bilona Process',
+      title: 'Ancient Bilona Method',
+      subtitle: '5000 Years of Vedic Tradition',
+      description: 'Our ghee is crafted using the ancient Vedic Bilona churning process — hand-churned from curd, slow-cooked on low flame, preserving every nutrient.',
+      bgImage: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1920&q=80',
+      fallbackBg: 'linear-gradient(135deg, #365314 0%, #4d7c0f 40%, #84cc16 100%)',
+      productImage: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=700&q=80',
+      imageAlt: 'Traditional bilona churning process for making pure ghee',
+    },
+    {
+      badge: '💚 Ayurvedic Superfood',
+      title: 'Pure Health',
+      subtitle: 'In Every Golden Spoonful',
+      description: 'Rich in A2 beta-casein protein, vitamins A, D, E & K, and essential fatty acids. Ayurveda\'s most revered superfood — your family\'s daily wellness ritual.',
+      bgImage: 'https://images.unsplash.com/photo-1467621591366-f0da5f7d7be1?auto=format&fit=crop&w=1920&q=80',
+      fallbackBg: 'linear-gradient(135deg, #451a03 0%, #7c2d12 40%, #c2410c 100%)',
+      productImage: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=700&q=80',
+      imageAlt: 'Healthy Indian food cooked with pure desi ghee',
+    },
+  ]
+
+  const goToSlide = useCallback((index) => {
+    setCurrentHeroSlide(index)
+  }, [])
+
+  const SLIDE_COUNT = 3
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroSlide(prev => (prev + 1) % SLIDE_COUNT)
+    }, 5500)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <>
@@ -179,77 +230,118 @@ const Home = () => {
         }}
       />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 via-cream-50 to-yellow-50 py-16 md:py-24">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
-                🌿 100% Pure A2 Bilona Ghee
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-5 leading-tight">
-                Pure Desi Ghee
-                <span className="block text-primary-500 mt-1">Made with Love</span>
-              </h1>
-              <p className="text-lg text-gray-600 mb-5 leading-relaxed">
-                Experience the authentic taste of traditional Indian ghee.
-                Made from the finest A2 cow &amp; buffalo milk using the time-honored Bilona method.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> 100% Natural
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> No Preservatives
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> FSSAI Certified
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> Farm Fresh
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-4 mb-8">
-                <Link to="/products">
-                  <Button size="lg" className="shadow-gold hover:shadow-premium">
-                    Shop Now
-                    <ArrowRight size={18} className="ml-2" />
-                  </Button>
-                </Link>
-                <Link to="/about">
-                  <Button variant="outline" size="lg">
-                    Our Story
-                  </Button>
-                </Link>
-              </div>
+      {/* Hero Slider Section */}
+      <section className="relative overflow-hidden" style={{ height: 'calc(100vh - 90px)', minHeight: '580px', maxHeight: '820px' }}>
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentHeroSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+            style={{ background: slide.fallbackBg }}
+          >
+            {/* Background image (loads on top of gradient fallback) */}
+            <img
+              src={slide.bgImage}
+              alt={slide.title}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+            {/* Dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/20"></div>
+            {/* Bottom fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent"></div>
 
-              {/* Trust badges */}
-              <div className="flex flex-wrap gap-5 text-sm text-gray-500">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  Lab Tested &amp; Certified
+            {/* Slide content */}
+            <div className="relative h-full container-custom flex items-center">
+              <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center w-full py-8">
+                {/* Left: Text content */}
+                <div className="text-white">
+                  <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest border border-white/25">
+                    {slide.badge}
+                  </span>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-white mb-4 leading-tight">
+                    {slide.title}
+                    <span className="block text-amber-300 mt-1 text-3xl md:text-4xl lg:text-5xl">{slide.subtitle}</span>
+                  </h1>
+                  <p className="text-base md:text-lg text-white/85 mb-7 leading-relaxed max-w-lg">
+                    {slide.description}
+                  </p>
+                  {/* Trust badges */}
+                  <div className="flex flex-wrap gap-2 mb-7">
+                    <span className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm border border-white/20">
+                      <CheckCircle size={13} className="text-amber-300" /> 100% Natural
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm border border-white/20">
+                      <CheckCircle size={13} className="text-amber-300" /> No Preservatives
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm border border-white/20">
+                      <CheckCircle size={13} className="text-amber-300" /> FSSAI Certified
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <Link to="/products">
+                      <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white border-none shadow-lg hover:shadow-xl">
+                        Shop Now
+                        <ArrowRight size={18} className="ml-2" />
+                      </Button>
+                    </Link>
+                    <Link to="/about">
+                      <Button variant="outline" size="lg" className="border-white/70 text-white hover:bg-white/15 hover:border-white">
+                        Our Story
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  No Preservatives
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  Free Shipping ₹500+
+
+                {/* Right: Product image */}
+                <div className="hidden md:flex justify-center items-center">
+                  <div className="relative">
+                    <div className="absolute -inset-8 bg-amber-300/20 rounded-full blur-3xl"></div>
+                    <img
+                      src={slide.productImage}
+                      alt={slide.imageAlt}
+                      className="relative rounded-3xl shadow-2xl max-w-xs lg:max-w-sm w-full object-cover border-2 border-white/20"
+                      style={{ maxHeight: '420px' }}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="relative flex items-center justify-center">
-              <div className="absolute -inset-6 bg-gradient-to-br from-amber-200 via-yellow-200 to-amber-300 rounded-3xl opacity-30 blur-3xl"></div>
-              <img
-                src="/images/hero.png"
-                alt="Pure Desi Ghee - Premium Vashudha Ghee Jar"
-                className="relative rounded-3xl shadow-2xl w-full max-w-lg object-cover"
-                loading="eager"
-              />
             </div>
           </div>
+        ))}
+
+        {/* Navigation dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 items-center">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToSlide(i)}
+              className={`rounded-full transition-all duration-300 ${
+                i === currentHeroSlide ? 'w-7 h-3 bg-amber-400' : 'w-3 h-3 bg-white/50 hover:bg-white/70'
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
         </div>
+
+        {/* Prev arrow */}
+        <button
+          onClick={() => setCurrentHeroSlide(prev => (prev - 1 + SLIDE_COUNT) % SLIDE_COUNT)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/15 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-3 transition-all border border-white/20"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={22} />
+        </button>
+        {/* Next arrow */}
+        <button
+          onClick={() => setCurrentHeroSlide(prev => (prev + 1) % SLIDE_COUNT)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/15 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-3 transition-all border border-white/20"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={22} />
+        </button>
       </section>
 
       {/* Features / USP Strip */}
@@ -332,9 +424,9 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/cow.png"
+                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80"
                   alt="Desi Cow - Source of Pure A2 Cow Ghee"
-                  className="relative rounded-2xl shadow-xl w-full max-w-md object-cover"
+                  className="relative rounded-2xl shadow-xl w-full max-w-md object-cover bg-amber-100 min-h-[280px]"
                   loading="lazy"
                 />
               </div>
@@ -351,7 +443,7 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-purple-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/bafelow.png"
+                  src="https://images.unsplash.com/photo-1592483591000-ac5af7e0c7e6?auto=format&fit=crop&w=900&q=80"
                   alt="Buffalo - Source of Rich Creamy Buffalo Ghee"
                   className="relative rounded-2xl shadow-xl w-full max-w-md object-cover"
                   loading="lazy"
@@ -410,16 +502,40 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Bilona Process Illustration */}
-          <div className="flex justify-center mb-12">
-            <div className="relative max-w-2xl w-full">
-              <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
+          {/* Process Photo Gallery */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            <div className="relative rounded-2xl overflow-hidden shadow-premium aspect-[4/3]">
               <img
-                src="/images/bilona-process.svg"
-                alt="Traditional Bilona Churning Process - Ancient Indian Ghee Making"
-                className="relative w-full rounded-2xl shadow-premium"
+                src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80"
+                alt="Fresh milk collection from indigenous desi cows"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p className="text-white text-sm font-semibold">Fresh Milk Collection</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-premium aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=600&q=80"
+                alt="Traditional bilona hand-churning process"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p className="text-white text-sm font-semibold">Bilona Hand-Churning</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-premium aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80"
+                alt="Slow simmering to create pure golden ghee"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <p className="text-white text-sm font-semibold">Slow-Cooked to Perfection</p>
+              </div>
             </div>
           </div>
 
@@ -528,11 +644,21 @@ const Home = () => {
                     <Star key={j} size={16} className="text-primary-500 fill-primary-400" />
                   ))}
                 </div>
-                <p className="text-gray-600 italic mb-4">&ldquo;{t.text}&rdquo;</p>
+                <p className="text-gray-600 italic mb-5">&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-lg">
-                    {t.name.charAt(0)}
-                  </div>
+                  {brokenAvatars.has(i) ? (
+                    <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-lg border-2 border-amber-200">
+                      {t.name.charAt(0)}
+                    </div>
+                  ) : (
+                    <img
+                      src={t.avatar}
+                      alt={`${t.name} - Verified Customer`}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-amber-200"
+                      loading="lazy"
+                      onError={() => setBrokenAvatars(prev => new Set([...prev, i]))}
+                    />
+                  )}
                   <div>
                     <p className="font-semibold text-gray-900">{t.name}</p>
                     <p className="text-sm text-gray-500">{t.location}</p>
@@ -697,24 +823,49 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
             {[
-              { emoji: '🥘', label: 'Dal Tadka with Ghee' },
-              { emoji: '🫙', label: 'Fresh Ghee Jar' },
-              { emoji: '🐄', label: 'Gir Cow' },
-              { emoji: '🌿', label: 'Natural Ingredients' },
-              { emoji: '🥛', label: 'Churning Process' },
-              { emoji: '🍯', label: 'Golden Ghee' },
+              {
+                src: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=400&h=400&q=80',
+                label: 'Dal Tadka with Ghee',
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format&fit=crop&w=400&h=400&q=80',
+                label: 'Fresh Ghee Jar',
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&h=400&q=80',
+                label: 'Gir Cow',
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=400&h=400&q=80',
+                label: 'Organic Farm',
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=400&h=400&q=80',
+                label: 'Churning Process',
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&h=400&q=80',
+                label: 'Golden Ghee',
+              },
             ].map((item, i) => (
               <a
                 key={i}
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="aspect-square bg-gradient-to-br from-amber-100 to-yellow-100 rounded-xl flex items-center justify-center text-4xl hover:from-amber-200 hover:to-yellow-200 hover:scale-105 transition-all duration-300 group relative overflow-hidden"
+                className="aspect-square rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group relative"
                 aria-label={item.label}
               >
-                <span>{item.emoji}</span>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-end justify-center pb-2 opacity-0 group-hover:opacity-100">
-                  <span className="text-white text-[10px] font-medium text-center px-1">{item.label}</span>
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="w-full h-full object-cover group-hover:brightness-90 transition-all duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-end justify-center pb-2">
+                  <span className="text-white text-[10px] font-semibold text-center px-1 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    {item.label}
+                  </span>
                 </div>
               </a>
             ))}
