@@ -94,7 +94,7 @@ const About = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/hero.png"
+                src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80"
                 alt="Vashudha Ghee — Premium Pure Desi Ghee Jar"
                 className="relative rounded-3xl shadow-premium w-full object-cover"
               />
@@ -135,14 +135,15 @@ const About = () => {
             </p>
           </div>
 
-          {/* Bilona Process Illustration */}
+          {/* Bilona Process Image */}
           <div className="flex justify-center mb-12">
             <div className="relative max-w-2xl w-full">
               <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/bilona-process.svg"
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80"
                 alt="Traditional Bilona Churning Process — Ancient Indian Ghee Making Method"
-                className="relative w-full rounded-2xl shadow-premium"
+                className="relative w-full rounded-2xl shadow-premium object-cover"
+                style={{ aspectRatio: '16/9' }}
                 loading="lazy"
               />
             </div>
@@ -224,7 +225,7 @@ const About = () => {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-green-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/cow.png"
+                src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=800&q=80"
                 alt="Gir Cow - Source of A2 Milk for Vashudha Ghee"
                 className="relative rounded-3xl shadow-premium w-full object-cover"
               />

@@ -4,6 +4,7 @@ import { ArrowRight, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle, Flame
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
 import ProductCard from '@/components/Product/ProductCard'
+import HeroSlider from '@/components/Common/HeroSlider'
 import productService from '@/services/product.service'
 
 const Home = () => {
@@ -179,78 +180,8 @@ const Home = () => {
         }}
       />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 via-cream-50 to-yellow-50 py-16 md:py-24">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
-                🌿 100% Pure A2 Bilona Ghee
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-5 leading-tight">
-                Pure Desi Ghee
-                <span className="block text-primary-500 mt-1">Made with Love</span>
-              </h1>
-              <p className="text-lg text-gray-600 mb-5 leading-relaxed">
-                Experience the authentic taste of traditional Indian ghee.
-                Made from the finest A2 cow &amp; buffalo milk using the time-honored Bilona method.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> 100% Natural
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> No Preservatives
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> FSSAI Certified
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> Farm Fresh
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-4 mb-8">
-                <Link to="/products">
-                  <Button size="lg" className="shadow-gold hover:shadow-premium">
-                    Shop Now
-                    <ArrowRight size={18} className="ml-2" />
-                  </Button>
-                </Link>
-                <Link to="/about">
-                  <Button variant="outline" size="lg">
-                    Our Story
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Trust badges */}
-              <div className="flex flex-wrap gap-5 text-sm text-gray-500">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  Lab Tested &amp; Certified
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  No Preservatives
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  Free Shipping ₹500+
-                </div>
-              </div>
-            </div>
-            <div className="relative flex items-center justify-center">
-              <div className="absolute -inset-6 bg-gradient-to-br from-amber-200 via-yellow-200 to-amber-300 rounded-3xl opacity-30 blur-3xl"></div>
-              <img
-                src="/images/hero.png"
-                alt="Pure Desi Ghee - Premium Vashudha Ghee Jar"
-                className="relative rounded-3xl shadow-2xl w-full max-w-lg object-cover"
-                loading="eager"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Slider */}
+      <HeroSlider />
 
       {/* Features / USP Strip */}
       <section className="py-16 bg-primary-500">
@@ -332,7 +263,7 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/cow.png"
+                  src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=800&q=80"
                   alt="Desi Cow - Source of Pure A2 Cow Ghee"
                   className="relative rounded-2xl shadow-xl w-full max-w-md object-cover"
                   loading="lazy"
@@ -351,7 +282,7 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-purple-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/bafelow.png"
+                  src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80"
                   alt="Buffalo - Source of Rich Creamy Buffalo Ghee"
                   className="relative rounded-2xl shadow-xl w-full max-w-md object-cover"
                   loading="lazy"
@@ -410,14 +341,15 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Bilona Process Illustration */}
+          {/* Bilona Process Image */}
           <div className="flex justify-center mb-12">
             <div className="relative max-w-2xl w-full">
               <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/bilona-process.svg"
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80"
                 alt="Traditional Bilona Churning Process - Ancient Indian Ghee Making"
-                className="relative w-full rounded-2xl shadow-premium"
+                className="relative w-full rounded-2xl shadow-premium object-cover"
+                style={{ aspectRatio: '16/9' }}
                 loading="lazy"
               />
             </div>
@@ -697,23 +629,46 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
             {[
-              { emoji: '🥘', label: 'Dal Tadka with Ghee' },
-              { emoji: '🫙', label: 'Fresh Ghee Jar' },
-              { emoji: '🐄', label: 'Gir Cow' },
-              { emoji: '🌿', label: 'Natural Ingredients' },
-              { emoji: '🥛', label: 'Churning Process' },
-              { emoji: '🍯', label: 'Golden Ghee' },
+              {
+                image: 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=400&q=80',
+                label: 'Fresh Ghee Jar'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=400&q=80',
+                label: 'Gir Cow'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1574226516831-e1dff420e562?auto=format&fit=crop&w=400&q=80',
+                label: 'Golden Ghee Bowl'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=400&q=80',
+                label: 'Buffalo Farm'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80',
+                label: 'Traditional Cooking'
+              },
+              {
+                image: 'https://images.unsplash.com/photo-1548695269-0b3d7f985ef2?auto=format&fit=crop&w=400&q=80',
+                label: 'Farm Fresh Milk'
+              },
             ].map((item, i) => (
               <a
                 key={i}
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="aspect-square bg-gradient-to-br from-amber-100 to-yellow-100 rounded-xl flex items-center justify-center text-4xl hover:from-amber-200 hover:to-yellow-200 hover:scale-105 transition-all duration-300 group relative overflow-hidden"
+                className="aspect-square rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group relative bg-amber-100"
                 aria-label={item.label}
               >
-                <span>{item.emoji}</span>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-end justify-center pb-2 opacity-0 group-hover:opacity-100">
+                <img
+                  src={item.image}
+                  alt={item.label}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-2 opacity-0 group-hover:opacity-100">
                   <span className="text-white text-[10px] font-medium text-center px-1">{item.label}</span>
                 </div>
               </a>
