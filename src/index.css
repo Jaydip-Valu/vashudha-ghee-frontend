@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,12 +6,15 @@
 
 @layer base {
   body {
-    @apply bg-cream-50 text-gray-900 antialiased;
-    background-color: #fffdf5;
+    @apply antialiased;
+    font-family: 'Lato', system-ui, sans-serif;
+    background-color: #F5F5DC;
+    color: #2F4F4F;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+    color: #2F4F4F;
   }
 }
 
@@ -53,11 +56,14 @@
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold font-heading text-gray-900;
+    @apply text-3xl md:text-4xl font-bold font-heading;
+    color: #2F4F4F;
   }
 
   .section-subtitle {
-    @apply text-gray-500 mt-3 max-w-2xl mx-auto text-lg;
+    @apply mt-3 max-w-2xl mx-auto text-lg;
+    color: #2F4F4F;
+    opacity: 0.7;
   }
 
   .gold-divider {
@@ -71,26 +77,38 @@
   }
 
   .bg-cream {
-    background-color: #fffdf5;
+    background-color: #F5F5DC;
   }
 
   .bg-cream-warm {
-    background-color: #fff9e6;
+    background-color: #ede8c0;
   }
 
   .text-gold {
-    color: #d4a017;
+    color: #B8860B;
   }
 
   .border-gold {
-    border-color: #d4a017;
+    border-color: #B8860B;
+  }
+
+  .text-dark-slate {
+    color: #2F4F4F;
+  }
+
+  .bg-dark-slate {
+    background-color: #2F4F4F;
   }
 
   .gradient-gold {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+    background: linear-gradient(135deg, #f5f5dc 0%, #e8e0a0 50%, #B8860B 100%);
+  }
+
+  .gradient-gold-glow {
+    background: radial-gradient(circle, #B8860B 0%, transparent 70%);
   }
 
   .gradient-cream {
-    background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 50%, #fef3c7 100%);
+    background: linear-gradient(135deg, #F5F5DC 0%, #ede8c0 50%, #e0d9a0 100%);
   }
 }

@@ -1,13 +1,77 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle, Flame, Brain, Zap, Moon, ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowRight, Truck, Shield, Heart, Star, Leaf, Award, CheckCircle, Flame, Brain, Zap, Moon, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
 import SEO from '@/components/Common/SEO'
 import Button from '@/components/Common/Button'
 import ProductCard from '@/components/Product/ProductCard'
 import productService from '@/services/product.service'
 
+const heroSlides = [
+  {
+    id: 1,
+    label: '🏺 The Product',
+    heading: 'Pure Desi Ghee',
+    subheading: 'Made with Love',
+    description:
+      'Experience the authentic taste of traditional Indian ghee — a premium glass jar of golden, grainy-textured Desi Ghee with a rich amber glow. Made using the ancient Bilona method from the finest A2 cow milk.',
+    image: '/images/hero.png',
+    imageAlt: 'Premium glass jar of golden Desi Ghee — Vashudha Ghee',
+    badges: ['100% Natural', 'No Preservatives', 'FSSAI Certified', 'Farm Fresh'],
+    bg: 'from-[#F5F5DC] via-[#ede8c0] to-[#e8e0a8]',
+    cta: { label: 'Shop Now', to: '/products' },
+    ctaOutline: { label: 'Our Story', to: '/about' },
+  },
+  {
+    id: 2,
+    label: '🐄 The Source',
+    heading: 'Indigenous Gir Cow',
+    subheading: "Nature's Finest A2 Milk",
+    description:
+      'Our majestic Gir cows roam freely on lush organic pastures, grazing under golden sunlight. With their distinctive hump and dewlap, these indigenous cows produce the purest A2 beta-casein milk — the foundation of every jar of Vashudha Ghee.',
+    image: '/images/cow.png',
+    imageAlt: 'Majestic Indian Gir cow grazing on a lush organic farm — Vashudha Ghee source',
+    badges: ['A2 Bilona Ghee', 'Grass-Fed Cows', 'Ethical Farming', 'Free-Roaming'],
+    bg: 'from-[#F5F5DC] via-[#e8f0e0] to-[#d4e8c8]',
+    cta: { label: 'Learn More', to: '/about' },
+    ctaOutline: { label: 'Shop Ghee', to: '/products' },
+  },
+  {
+    id: 3,
+    label: '🪵 The Lifestyle',
+    heading: 'Golden Goodness',
+    subheading: 'Pure Organic Tradition',
+    description:
+      'A rustic wooden bowl of semi-solid golden Desi Ghee, resting on a weathered dark wood table with a vintage brass spoon nearby. Authentic, earthy, and organic — exactly the way ghee should be enjoyed.',
+    image: '/images/hero-ghee.svg',
+    imageAlt: 'Rustic bowl of golden Desi Ghee on weathered wood with a brass spoon — Vashudha lifestyle',
+    badges: ['Zero Preservatives', 'Traditional Recipe', 'Ayurvedic Goodness', 'Lab Tested'],
+    bg: 'from-[#F5F5DC] via-[#ede0c8] to-[#e8d4b0]',
+    cta: { label: 'Shop Now', to: '/products' },
+    ctaOutline: { label: 'Our Process', to: '/about' },
+  },
+]
+
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([])
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const goToSlide = useCallback((index) => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setActiveSlide(index)
+      setIsTransitioning(false)
+    }, 300)
+  }, [isTransitioning])
+
+  const nextSlide = useCallback(() => {
+    goToSlide((activeSlide + 1) % heroSlides.length)
+  }, [activeSlide, goToSlide])
+
+  const prevSlide = useCallback(() => {
+    goToSlide((activeSlide - 1 + heroSlides.length) % heroSlides.length)
+  }, [activeSlide, goToSlide])
 
   useEffect(() => {
     const fetchFeatured = async () => {
@@ -20,6 +84,11 @@ const Home = () => {
     }
     fetchFeatured()
   }, [])
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000)
+    return () => clearInterval(timer)
+  }, [nextSlide])
 
   const features = [
     {
@@ -179,76 +248,109 @@ const Home = () => {
         }}
       />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 via-cream-50 to-yellow-50 py-16 md:py-24">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
-                🌿 100% Pure A2 Bilona Ghee
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-5 leading-tight">
-                Pure Desi Ghee
-                <span className="block text-primary-500 mt-1">Made with Love</span>
-              </h1>
-              <p className="text-lg text-gray-600 mb-5 leading-relaxed">
-                Experience the authentic taste of traditional Indian ghee.
-                Made from the finest A2 cow &amp; buffalo milk using the time-honored Bilona method.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> 100% Natural
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> No Preservatives
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> FSSAI Certified
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                  <CheckCircle size={13} /> Farm Fresh
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-4 mb-8">
-                <Link to="/products">
-                  <Button size="lg" className="shadow-gold hover:shadow-premium">
-                    Shop Now
-                    <ArrowRight size={18} className="ml-2" />
-                  </Button>
-                </Link>
-                <Link to="/about">
-                  <Button variant="outline" size="lg">
-                    Our Story
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Trust badges */}
-              <div className="flex flex-wrap gap-5 text-sm text-gray-500">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  Lab Tested &amp; Certified
+      {/* Hero Slider Section */}
+      <section className="relative overflow-hidden min-h-[600px] md:min-h-[700px]">
+        {heroSlides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 bg-gradient-to-br ${slide.bg} transition-opacity duration-700 ${
+              index === activeSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          >
+            <div className="container-custom h-full flex items-center py-16 md:py-24">
+              <div className={`grid md:grid-cols-2 gap-12 items-center w-full transition-all duration-500 ${
+                index === activeSlide && !isTransitioning ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                <div>
+                  <span className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm text-dark-gold text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest border border-primary-500/20">
+                    {slide.label}
+                  </span>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-dark-slate mb-2 leading-tight">
+                    {slide.heading}
+                  </h1>
+                  <p className="text-2xl md:text-3xl font-heading text-dark-gold mb-5">
+                    {slide.subheading}
+                  </p>
+                  <p className="text-lg text-dark-slate/80 mb-6 leading-relaxed">
+                    {slide.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {slide.badges.map((badge) => (
+                      <span key={badge} className="inline-flex items-center gap-1.5 bg-white/70 backdrop-blur-sm text-dark-slate px-3 py-1.5 rounded-full text-sm font-medium border border-primary-500/20">
+                        <CheckCircle size={13} className="text-dark-gold" /> {badge}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-4 mb-8">
+                    <Link to={slide.cta.to}>
+                      <Button size="lg" className="bg-dark-gold border-dark-gold hover:bg-primary-600 shadow-gold hover:shadow-premium">
+                        {slide.cta.label}
+                        <ArrowRight size={18} className="ml-2" />
+                      </Button>
+                    </Link>
+                    <Link to={slide.ctaOutline.to}>
+                      <Button variant="outline" size="lg" className="border-dark-gold text-dark-gold hover:bg-primary-50">
+                        {slide.ctaOutline.label}
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="flex flex-wrap gap-5 text-sm text-dark-slate/70">
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle size={15} className="text-dark-gold" />
+                      Lab Tested &amp; Certified
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle size={15} className="text-dark-gold" />
+                      No Preservatives
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle size={15} className="text-dark-gold" />
+                      Free Shipping ₹500+
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  No Preservatives
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle size={15} className="text-green-500" />
-                  Free Shipping ₹500+
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute -inset-6 rounded-3xl opacity-20 blur-3xl gradient-gold-glow"></div>
+                  <img
+                    src={slide.image}
+                    alt={slide.imageAlt}
+                    className="relative rounded-3xl shadow-2xl w-full max-w-lg object-cover"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
                 </div>
               </div>
-            </div>
-            <div className="relative flex items-center justify-center">
-              <div className="absolute -inset-6 bg-gradient-to-br from-amber-200 via-yellow-200 to-amber-300 rounded-3xl opacity-30 blur-3xl"></div>
-              <img
-                src="/images/hero.png"
-                alt="Pure Desi Ghee - Premium Vashudha Ghee Jar"
-                className="relative rounded-3xl shadow-2xl w-full max-w-lg object-cover"
-                loading="eager"
-              />
             </div>
           </div>
+        ))}
+
+        {/* Slider Controls */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center hover:bg-white transition-colors text-dark-gold"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center hover:bg-white transition-colors text-dark-gold"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`rounded-full transition-all duration-300 bg-dark-gold ${
+                index === activeSlide ? 'w-8 h-3' : 'w-3 h-3 opacity-50 hover:opacity-75'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
