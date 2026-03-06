@@ -76,7 +76,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src="/images/logo.svg" alt="Vashudha Ghee" className="h-12 w-auto" />
+              <img src="/images/logo.png" alt="Vashudha Ghee" className="h-12 w-auto" />
             </div>
             <p className="text-sm text-gray-400 mb-5 leading-relaxed">
               Premium quality pure desi ghee made with the traditional Bilona method.

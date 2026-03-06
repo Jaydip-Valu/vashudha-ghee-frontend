@@ -59,7 +59,7 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
               <img
-                src="/images/logo.svg"
+                src="/images/logo.png"
                 alt="Vashudha Ghee - Pure Desi Ghee"
                 className="h-12 md:h-14 w-auto"
               />

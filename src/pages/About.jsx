@@ -94,9 +94,9 @@ const About = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/hero-ghee-jar.svg"
+                src="/images/hero.png"
                 alt="Vashudha Ghee — Premium Pure Desi Ghee Jar"
-                className="relative rounded-3xl shadow-premium w-full"
+                className="relative rounded-3xl shadow-premium w-full object-cover"
               />
             </div>
           </div>
@@ -224,9 +224,9 @@ const About = () => {
             <div className="relative order-2 lg:order-1">
               <div className="absolute -inset-4 bg-green-100 rounded-3xl opacity-40 blur-2xl"></div>
               <img
-                src="/images/desi-cow.svg"
+                src="/images/cow.png"
                 alt="Gir Cow - Source of A2 Milk for Vashudha Ghee"
-                className="relative rounded-3xl shadow-premium w-full"
+                className="relative rounded-3xl shadow-premium w-full object-cover"
               />
             </div>
             <div className="order-1 lg:order-2">

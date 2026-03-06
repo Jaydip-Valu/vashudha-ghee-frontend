@@ -242,9 +242,9 @@ const Home = () => {
             <div className="relative flex items-center justify-center">
               <div className="absolute -inset-6 bg-gradient-to-br from-amber-200 via-yellow-200 to-amber-300 rounded-3xl opacity-30 blur-3xl"></div>
               <img
-                src="/images/hero-ghee-jar.svg"
+                src="/images/hero.png"
                 alt="Pure Desi Ghee - Premium Vashudha Ghee Jar"
-                className="relative rounded-3xl shadow-2xl w-full max-w-lg"
+                className="relative rounded-3xl shadow-2xl w-full max-w-lg object-cover"
                 loading="eager"
               />
             </div>
@@ -332,9 +332,9 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/desi-cow.svg"
+                  src="/images/cow.png"
                   alt="Desi Cow - Source of Pure A2 Cow Ghee"
-                  className="relative rounded-2xl shadow-xl w-full max-w-md"
+                  className="relative rounded-2xl shadow-xl w-full max-w-md object-cover"
                   loading="lazy"
                 />
               </div>
@@ -351,9 +351,9 @@ const Home = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-purple-200 rounded-3xl opacity-20 blur-xl"></div>
                 <img
-                  src="/images/buffalo.svg"
+                  src="/images/bafelow.png"
                   alt="Buffalo - Source of Rich Creamy Buffalo Ghee"
-                  className="relative rounded-2xl shadow-xl w-full max-w-md"
+                  className="relative rounded-2xl shadow-xl w-full max-w-md object-cover"
                   loading="lazy"
                 />
               </div>
