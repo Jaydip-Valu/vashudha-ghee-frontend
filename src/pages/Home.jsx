@@ -180,37 +180,40 @@ const Home = () => {
       />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 via-amber-50 to-secondary-50 py-20">
+      <section className="bg-gradient-to-br from-amber-50 via-cream-50 to-yellow-50 py-16 md:py-24">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="flex items-center gap-3 mb-5">
-                <img src="/images/logo.svg" alt="Vashudha Ghee Logo" className="h-16 w-auto" />
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-6">
+              <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
+                🌿 100% Pure A2 Bilona Ghee
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-5 leading-tight">
                 Pure Desi Ghee
-                <span className="block text-primary-500">Made with Love</span>
+                <span className="block text-primary-500 mt-1">Made with Love</span>
               </h1>
-              <p className="text-lg text-gray-600 mb-4">
+              <p className="text-lg text-gray-600 mb-5 leading-relaxed">
                 Experience the authentic taste of traditional Indian ghee.
-                Made from the finest quality cow &amp; buffalo milk using time-honored Bilona methods.
+                Made from the finest A2 cow &amp; buffalo milk using the time-honored Bilona method.
               </p>
-              <div className="flex flex-wrap gap-3 mb-8">
-                <span className="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
-                  <CheckCircle size={14} /> 100% Natural
+              <div className="flex flex-wrap gap-2 mb-8">
+                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
+                  <CheckCircle size={13} /> 100% Natural
                 </span>
-                <span className="inline-flex items-center gap-1 bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full text-sm font-medium">
-                  <CheckCircle size={14} /> No Preservatives
+                <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-sm font-medium">
+                  <CheckCircle size={13} /> No Preservatives
                 </span>
-                <span className="inline-flex items-center gap-1 bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
-                  <CheckCircle size={14} /> Farm Fresh
+                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full text-sm font-medium">
+                  <CheckCircle size={13} /> FSSAI Certified
+                </span>
+                <span className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full text-sm font-medium">
+                  <CheckCircle size={13} /> Farm Fresh
                 </span>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 mb-8">
                 <Link to="/products">
-                  <Button size="lg" className="shadow-lg hover:shadow-xl">
+                  <Button size="lg" className="shadow-gold hover:shadow-premium">
                     Shop Now
-                    <ArrowRight size={20} className="ml-2" />
+                    <ArrowRight size={18} className="ml-2" />
                   </Button>
                 </Link>
                 <Link to="/about">
@@ -221,23 +224,23 @@ const Home = () => {
               </div>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap gap-6 text-sm text-gray-600">
+              <div className="flex flex-wrap gap-5 text-sm text-gray-500">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle size={16} className="text-secondary-500" />
-                  Lab Tested & Certified
+                  <CheckCircle size={15} className="text-green-500" />
+                  Lab Tested &amp; Certified
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle size={16} className="text-secondary-500" />
+                  <CheckCircle size={15} className="text-green-500" />
                   No Preservatives
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle size={16} className="text-secondary-500" />
+                  <CheckCircle size={15} className="text-green-500" />
                   Free Shipping ₹500+
                 </div>
               </div>
             </div>
             <div className="relative flex items-center justify-center">
-              <div className="absolute -inset-6 bg-gradient-to-br from-primary-200 via-amber-200 to-secondary-200 rounded-3xl opacity-40 blur-2xl"></div>
+              <div className="absolute -inset-6 bg-gradient-to-br from-amber-200 via-yellow-200 to-amber-300 rounded-3xl opacity-30 blur-3xl"></div>
               <img
                 src="/images/hero-ghee.svg"
                 alt="Pure Desi Ghee - Traditional Indian Brass Ghee Matka with Spoon and Leaves"
@@ -250,9 +253,9 @@ const Home = () => {
       </section>
 
       {/* Features / USP Strip */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-primary-500">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
             {[
               { value: '10,000+', label: 'Happy Customers' },
               { value: '100%', label: 'Pure & Natural' },
@@ -261,7 +264,7 @@ const Home = () => {
             ].map((stat, i) => (
               <div key={i}>
                 <div className="text-3xl md:text-4xl font-bold font-heading">{stat.value}</div>
-                <div className="text-primary-100 text-sm mt-1">{stat.label}</div>
+                <div className="text-amber-100 text-sm mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -276,7 +279,7 @@ const Home = () => {
               const Icon = feature.icon
               return (
                 <div key={index} className="text-center p-6 rounded-2xl hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100 text-primary-600 mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 text-primary-600 mb-4">
                     <Icon size={30} />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-gray-800">{feature.title}</h3>
@@ -601,31 +604,184 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary-500 text-white">
-        <div className="container-custom text-center">
-          <div className="flex justify-center mb-6">
-            <h2 className="text-4xl font-bold font-heading">Vashudha Ghee</h2>
+      {/* Special Offers Section */}
+      <section className="py-14 bg-gradient-to-r from-amber-600 to-yellow-500">
+        <div className="container-custom">
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                badge: '🎉 New Customer',
+                title: '10% OFF Your First Order',
+                desc: 'Use code WELCOME10 at checkout',
+                cta: 'Shop Now',
+                link: '/products',
+              },
+              {
+                badge: '🚚 Free Shipping',
+                title: 'Free Delivery on ₹500+',
+                desc: 'Pan-India delivery, no hidden charges',
+                cta: 'Browse Products',
+                link: '/products',
+              },
+              {
+                badge: '📦 Bulk Order',
+                title: 'Save More on Bulk Orders',
+                desc: 'Special pricing for 5L+ orders — call us!',
+                cta: 'WhatsApp Us',
+                link: 'https://wa.me/919876543210',
+                external: true,
+              },
+            ].map((offer, i) => (
+              <div key={i} className="bg-white/15 backdrop-blur-sm rounded-2xl p-6 text-white border border-white/20 hover:bg-white/20 transition-all">
+                <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full mb-3 inline-block">
+                  {offer.badge}
+                </span>
+                <h3 className="text-xl font-bold font-heading mb-1">{offer.title}</h3>
+                <p className="text-yellow-100 text-sm mb-4">{offer.desc}</p>
+                {offer.external ? (
+                  <a
+                    href={offer.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold bg-white text-amber-700 px-4 py-2 rounded-full hover:bg-yellow-50 transition-colors"
+                  >
+                    {offer.cta} <ArrowRight size={15} />
+                  </a>
+                ) : (
+                  <Link
+                    to={offer.link}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold bg-white text-amber-700 px-4 py-2 rounded-full hover:bg-yellow-50 transition-colors"
+                  >
+                    {offer.cta} <ArrowRight size={15} />
+                  </Link>
+                )}
+              </div>
+            ))}
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Experience Pure Ghee?
+        </div>
+      </section>
+
+      {/* Social Proof / Instagram Section */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <span className="section-badge">📸 Instagram</span>
+            <h2 className="section-title mb-2">Follow Our Journey</h2>
+            <div className="gold-divider"></div>
+            <p className="section-subtitle">
+              Real customers, real kitchens, real love. Follow us{' '}
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 font-semibold hover:underline"
+              >
+                @vashudhaghee
+              </a>{' '}
+              for daily ghee recipes and health tips.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+            {[
+              { emoji: '🥘', label: 'Dal Tadka with Ghee' },
+              { emoji: '🫙', label: 'Fresh Ghee Jar' },
+              { emoji: '🐄', label: 'Gir Cow' },
+              { emoji: '🌿', label: 'Natural Ingredients' },
+              { emoji: '🥛', label: 'Churning Process' },
+              { emoji: '🍯', label: 'Golden Ghee' },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="aspect-square bg-gradient-to-br from-amber-100 to-yellow-100 rounded-xl flex items-center justify-center text-4xl hover:from-amber-200 hover:to-yellow-200 hover:scale-105 transition-all duration-300 group relative overflow-hidden"
+                aria-label={item.label}
+              >
+                <span>{item.emoji}</span>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-end justify-center pb-2 opacity-0 group-hover:opacity-100">
+                  <span className="text-white text-[10px] font-medium text-center px-1">{item.label}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline inline-flex"
+            >
+              Follow @vashudhaghee on Instagram
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 bg-gradient-to-br from-amber-50 via-cream-100 to-yellow-50 border-y border-amber-100">
+        <div className="container-custom">
+          <div className="max-w-2xl mx-auto text-center">
+            <span className="section-badge">📬 Newsletter</span>
+            <h2 className="text-3xl font-bold font-heading text-gray-900 mb-3">
+              Get Exclusive Offers & Health Tips
+            </h2>
+            <p className="text-gray-600 mb-7">
+              Join 5,000+ subscribers who receive Ayurvedic recipes, ghee benefits,
+              and exclusive discount offers straight to their inbox.
+            </p>
+            <form
+              className="flex flex-col sm:flex-row gap-3"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-5 py-3.5 rounded-full border border-amber-200 bg-white focus:outline-none focus:border-primary-500 text-sm shadow-sm"
+              />
+              <button
+                type="submit"
+                className="btn-primary px-7 py-3.5 whitespace-nowrap"
+              >
+                Subscribe Free
+              </button>
+            </form>
+            <p className="text-xs text-gray-400 mt-3">
+              No spam, ever. Unsubscribe anytime. 🌿
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-amber-800 via-yellow-800 to-amber-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-hero-pattern opacity-20"></div>
+        <div className="container-custom text-center relative">
+          <span className="inline-block bg-white/15 text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
+            🌿 Experience the Difference
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold font-heading mb-5 leading-tight">
+            Ready for Pure, Authentic Ghee?
           </h2>
-          <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
-            Join thousands of happy customers who trust Vashudha Ghee for pure, authentic,
-            and naturally made desi ghee delivered to their doorstep.
+          <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto text-amber-100">
+            Join 10,000+ families who trust Vashudha Ghee for pure, authentic,
+            traditionally-made desi ghee — delivered fresh to their doorstep.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/products">
               <Button variant="secondary" size="lg">
                 Browse Products
-                <ArrowRight size={20} className="ml-2" />
+                <ArrowRight size={18} className="ml-2" />
               </Button>
             </Link>
-            <Link to="/about">
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary-600">
-                Our Story
-              </Button>
-            </Link>
+            <a
+              href="https://wa.me/919876543210?text=Hello%21%20I%20want%20to%20order%20Vashudha%20Ghee."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn bg-green-500 hover:bg-green-600 text-white px-7 py-3 text-base"
+            >
+              Order on WhatsApp
+            </a>
           </div>
         </div>
       </section>

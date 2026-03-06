@@ -7,6 +7,7 @@ import ProtectedRoute from './routes/ProtectedRoute'
 // Layout
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
+import WhatsAppButton from './components/Common/WhatsAppButton'
 
 // Public Pages
 import Home from './pages/Home'
@@ -24,6 +25,7 @@ import ShippingPolicy from './pages/ShippingPolicy'
 import ReturnPolicy from './pages/ReturnPolicy'
 // import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsConditions from './pages/TermsConditions'
+import Blog from './pages/Blog'
 
 // Protected Pages
 import Profile from './pages/Profile'
@@ -68,6 +70,8 @@ function App() {
           <Route path="/shipping" element={<ShippingPolicy />} />
           <Route path="/returns" element={<ReturnPolicy />} />
           <Route path="/terms" element={<TermsConditions />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<Blog />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
@@ -86,6 +90,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   )
 }

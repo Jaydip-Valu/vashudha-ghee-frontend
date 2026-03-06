@@ -16,43 +16,43 @@ const ProductCard = ({ product }) => {
 
   const rating = product.averageRating || 0
   const reviewCount = product.reviewCount || 0
-  const discount = product.originalPrice 
+  const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0
 
   return (
     <Link
       to={`/products/${product._id}`}
-      className="group card hover:shadow-lg transition-all duration-300"
+      className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-premium transition-all duration-300 hover:-translate-y-1 border border-amber-50 flex flex-col"
     >
       {/* Image */}
-      <div className="relative overflow-hidden bg-gray-100">
+      <div className="relative overflow-hidden bg-amber-50">
         <img
           src={getImageUrl(product.images?.[0])}
           alt={product.name}
-          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+          className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {discount > 0 && (
-          <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded text-sm font-semibold">
+          <div className="absolute top-3 left-3 bg-red-500 text-white px-2.5 py-1 rounded-full text-xs font-bold shadow">
             {discount}% OFF
           </div>
         )}
         {product.stock === 0 && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <span className="text-white font-semibold text-lg">Out of Stock</span>
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         {/* Category */}
-        <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+        <p className="text-xs text-amber-600 uppercase tracking-wider font-semibold mb-1">
           {product.categoryLabel || product.category}
         </p>
 
         {/* Name */}
-        <h3 className="font-semibold text-gray-800 mb-2 group-hover:text-primary-500 transition line-clamp-2">
+        <h3 className="font-semibold text-gray-800 mb-2 group-hover:text-primary-600 transition line-clamp-2 text-sm leading-snug flex-1">
           {product.name}
         </h3>
 
@@ -63,23 +63,23 @@ const ProductCard = ({ product }) => {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  size={14}
-                  className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                  size={13}
+                  className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200 fill-gray-200'}
                 />
               ))}
             </div>
-            <span className="text-xs text-gray-500">({reviewCount})</span>
+            <span className="text-xs text-gray-400">({reviewCount})</span>
           </div>
         )}
 
         {/* Price */}
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3 mt-1">
           <div>
             <span className="text-lg font-bold text-gray-900">
               {formatCurrency(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="ml-2 text-sm text-gray-500 line-through">
+              <span className="ml-2 text-sm text-gray-400 line-through">
                 {formatCurrency(product.originalPrice)}
               </span>
             )}
@@ -90,10 +90,10 @@ const ProductCard = ({ product }) => {
         <button
           onClick={handleAddToCart}
           disabled={product.stock === 0}
-          className="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full btn-primary text-sm py-2.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
         >
-          <ShoppingCart size={18} />
-          <span>{product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}</span>
+          <ShoppingCart size={16} className="mr-2" />
+          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
         </button>
       </div>
     </Link>
