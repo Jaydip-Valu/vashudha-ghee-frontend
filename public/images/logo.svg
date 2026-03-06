@@ -1,57 +1,77 @@
-<svg width="220" height="70" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 70">
+<svg width="240" height="72" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72">
   <defs>
-    <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="logoGoldRing" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f59e0b"/>
       <stop offset="50%" stop-color="#fbbf24"/>
       <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
-    <linearGradient id="logoBadge" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fef3c7"/>
-      <stop offset="100%" stop-color="#fde68a"/>
+    <linearGradient id="logoBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <linearGradient id="logoText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#78350f"/>
     </linearGradient>
   </defs>
 
-  <!-- Badge / emblem circle -->
-  <circle cx="35" cy="35" r="32" fill="url(#logoGold)"/>
-  <circle cx="35" cy="35" r="26" fill="#92400e"/>
-  <circle cx="35" cy="35" r="22" fill="url(#logoBadge)"/>
+  <!-- Outer gold ring -->
+  <circle cx="36" cy="36" r="33" fill="url(#logoGoldRing)"/>
+  <!-- Dark brown inner ring -->
+  <circle cx="36" cy="36" r="27" fill="#78350f"/>
+  <!-- Cream inner fill -->
+  <circle cx="36" cy="36" r="23" fill="url(#logoBg)"/>
 
-  <!-- Cow silhouette inside badge -->
-  <!-- body -->
-  <ellipse cx="35" cy="39" rx="11" ry="7" fill="#92400e"/>
-  <!-- head -->
-  <ellipse cx="24" cy="34" rx="7" ry="6" fill="#92400e"/>
-  <!-- ear -->
-  <ellipse cx="20" cy="30" rx="3" ry="4" fill="#92400e" transform="rotate(-15,20,30)"/>
-  <!-- horn left -->
-  <path d="M19 28 Q15 22 18 19" stroke="#d97706" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- horn right -->
-  <path d="M28 26 Q31 20 29 18" stroke="#d97706" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- legs -->
-  <line x1="29" y1="45" x2="29" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="34" y1="46" x2="34" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="39" y1="46" x2="39" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="44" y1="45" x2="44" y2="52" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- tail -->
-  <path d="M46 38 Q52 34 50 40" stroke="#92400e" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- udder dot -->
-  <ellipse cx="36" cy="46" rx="4" ry="2.5" fill="#fca5a5" opacity="0.7"/>
-  <!-- eye -->
-  <circle cx="22" cy="33" r="1.5" fill="#fef3c7"/>
-  <!-- ghee drop above -->
-  <path d="M35 15 Q37 20 35 23 Q33 20 35 15Z" fill="#d97706"/>
+  <!-- COW FACE (front view, stylized) -->
+  <!-- Face/head oval -->
+  <ellipse cx="36" cy="37" rx="12" ry="13" fill="#b45309"/>
+  <!-- Muzzle/snout -->
+  <ellipse cx="36" cy="44" rx="8" ry="5.5" fill="#d97706"/>
+  <!-- Muzzle highlight -->
+  <ellipse cx="36" cy="43" rx="6" ry="3.5" fill="#fbbf24" opacity="0.4"/>
 
-  <!-- Brand text -->
-  <text x="78" y="26" font-family="Poppins, Georgia, serif" font-size="20" font-weight="800"
-        fill="#92400e" letter-spacing="-0.5">Vashudha</text>
-  <text x="78" y="46" font-family="Poppins, Georgia, serif" font-size="16" font-weight="700"
-        fill="#d97706" letter-spacing="4">GHEE</text>
+  <!-- Left ear -->
+  <ellipse cx="21" cy="30" rx="5" ry="7.5" fill="#b45309" transform="rotate(-20 21 30)"/>
+  <ellipse cx="21" cy="30" rx="2.8" ry="5" fill="#fde68a" transform="rotate(-20 21 30)"/>
+  <!-- Right ear -->
+  <ellipse cx="51" cy="30" rx="5" ry="7.5" fill="#b45309" transform="rotate(20 51 30)"/>
+  <ellipse cx="51" cy="30" rx="2.8" ry="5" fill="#fde68a" transform="rotate(20 51 30)"/>
 
-  <!-- Decorative divider line under GHEE -->
-  <line x1="78" y1="52" x2="210" y2="52" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+  <!-- Left horn (curved, elegant) -->
+  <path d="M25 26 C20 19 16 13 22 10" stroke="#92400e" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <!-- Right horn -->
+  <path d="M47 26 C52 19 56 13 50 10" stroke="#92400e" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <!-- Horn tips gold accent -->
+  <circle cx="22" cy="10" r="2" fill="#d97706"/>
+  <circle cx="50" cy="10" r="2" fill="#d97706"/>
+
+  <!-- Eyes -->
+  <ellipse cx="30" cy="34" rx="3" ry="3.5" fill="#78350f"/>
+  <ellipse cx="42" cy="34" rx="3" ry="3.5" fill="#78350f"/>
+  <!-- Eye whites/highlight -->
+  <circle cx="31" cy="33" r="1" fill="white" opacity="0.8"/>
+  <circle cx="43" cy="33" r="1" fill="white" opacity="0.8"/>
+
+  <!-- Nostrils -->
+  <ellipse cx="33" cy="46" rx="1.8" ry="1.2" fill="#92400e"/>
+  <ellipse cx="39" cy="46" rx="1.8" ry="1.2" fill="#92400e"/>
+
+  <!-- Small ghee drop on forehead (bindi style) -->
+  <path d="M36 22 Q37.5 26 36 28 Q34.5 26 36 22Z" fill="#d97706"/>
+
+  <!-- Brand name VASHUDHA -->
+  <text x="80" y="27" font-family="Georgia, 'Times New Roman', serif" font-size="21"
+        font-weight="bold" fill="url(#logoText)" letter-spacing="0.3">Vashudha</text>
+
+  <!-- Decorative gold line -->
+  <rect x="80" y="33" width="152" height="1.2" fill="#f59e0b" rx="1" opacity="0.8"/>
+
+  <!-- GHEE subtitle -->
+  <text x="80" y="50" font-family="Arial, Helvetica, sans-serif" font-size="13"
+        font-weight="700" fill="#d97706" letter-spacing="7">GHEE</text>
 
   <!-- Tagline -->
-  <text x="78" y="63" font-family="Arial, sans-serif" font-size="8" font-weight="400"
-        fill="#b45309" letter-spacing="1.5" opacity="0.85">PURE · NATURAL · TRADITIONAL</text>
+  <text x="80" y="64" font-family="Arial, Helvetica, sans-serif" font-size="7.5"
+        fill="#92400e" letter-spacing="2" opacity="0.75">PURE · BILONA · TRADITIONAL</text>
 </svg>
 
