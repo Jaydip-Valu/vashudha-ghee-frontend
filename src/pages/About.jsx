@@ -1,4 +1,5 @@
-import { Users, Target, Award, Heart } from 'lucide-react'
+import { Users, Target, Award, Heart, Leaf, CheckCircle, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import SEO from '@/components/Common/SEO'
 
 const About = () => {
@@ -6,152 +7,287 @@ const About = () => {
     {
       icon: Heart,
       title: 'Quality First',
-      description: 'We never compromise on quality. Every batch of our ghee is made with the finest ingredients.'
+      description: 'We never compromise on quality. Every batch is made with finest ingredients and tested for purity.'
     },
     {
       icon: Users,
       title: 'Traditional Methods',
-      description: 'Following time-honored recipes passed down through generations for authentic taste.'
+      description: 'Following the 5000-year-old Bilona (Valona Paddhati) method passed down through generations.'
     },
     {
       icon: Award,
       title: '100% Pure',
-      description: 'No additives, no preservatives. Just pure, natural ghee the way it should be.'
+      description: 'No additives, no preservatives, no artificial colors. Just pure, natural ghee the way it should be.'
     },
     {
       icon: Target,
       title: 'Customer Focused',
-      description: 'Your satisfaction is our priority. We ensure every customer gets the best experience.'
+      description: 'Your satisfaction is our priority. We ensure every customer gets the best experience, every time.'
     }
+  ]
+
+  const processSteps = [
+    { step: '01', title: 'Fresh Milk Collection', desc: 'We collect pure, fresh milk from grass-fed indigenous cows every morning — no mixing, no compromise.' },
+    { step: '02', title: 'Natural Curd Preparation', desc: 'Milk is fermented overnight using natural starters into thick, wholesome curd.' },
+    { step: '03', title: 'Bilona Hand-Churning', desc: 'The ancient wooden churner (Bilona) separates pure butter from curd — the Vedic way.' },
+    { step: '04', title: 'Slow Simmering', desc: 'Butter is slow-cooked on a low flame until it transforms into golden, aromatic, nutrient-rich ghee.' },
   ]
 
   return (
     <>
-      <SEO 
-        title="About Us - Our Story & Values"
-        description="Learn about Vashudha Ghee's journey, our commitment to quality, and traditional methods of making pure desi ghee. Discover what makes us special."
-        keywords="about vashudha ghee, our story, traditional ghee making, pure ghee company"
+      <SEO
+        title="About Us — Our Story, Bilona Process & Quality Promise | Vashudha Ghee"
+        description="Learn about Vashudha Ghee's journey, our traditional Bilona ghee-making process, quality promise, and farm-to-kitchen concept. 100% pure A2 Desi Ghee."
+        keywords="about vashudha ghee, our story, bilona method, traditional ghee making, pure ghee company, A2 desi ghee"
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'About Us', path: '/about' }
         ]}
       />
 
-      <div className="container-custom py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4">
-            About Vashudha Ghee
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Bringing the authentic taste of traditional Indian ghee to your home
+      {/* Page Hero */}
+      <section className="bg-gradient-to-br from-amber-50 via-cream-100 to-yellow-50 py-16 border-b border-amber-100">
+        <div className="container-custom text-center">
+          <span className="section-badge">🌿 Our Story</span>
+          <h1 className="section-title mb-3">About Vashudha Ghee</h1>
+          <div className="gold-divider"></div>
+          <p className="section-subtitle">
+            Bringing the authentic taste and Ayurvedic wisdom of traditional Indian ghee to families across the country.
           </p>
         </div>
+      </section>
 
-        {/* Our Story */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div>
-            <h2 className="text-3xl font-bold mb-6">Our Story</h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Vashudha Ghee was born from a simple belief: everyone deserves access to 
-                pure, traditional ghee made the way our ancestors made it. Our journey began 
-                in a small village where generations of our family have been perfecting the 
-                art of ghee-making.
-              </p>
-              <p>
-                We started with a mission to preserve traditional methods while ensuring 
-                the highest standards of quality and hygiene. Today, we're proud to serve 
-                thousands of families across the country who trust us for their daily ghee needs.
-              </p>
-              <p>
-                Every jar of Vashudha Ghee is a testament to our commitment to quality, 
-                tradition, and your health. We source milk from grass-fed cows and use 
-                traditional bilona method to extract the purest ghee.
-              </p>
+      {/* Our Story */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <div>
+              <span className="section-badge">🐄 Our Heritage</span>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-6">
+                A Story Born in the Heart of a Village
+              </h2>
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  Vashudha Ghee was born from a simple, profound belief: <strong className="text-gray-900">every family deserves access to pure,
+                  traditional ghee</strong> made exactly the way our ancestors made it — with devotion, patience, and love.
+                </p>
+                <p>
+                  Our journey began in a small village in Gujarat, where generations of our family have been perfecting
+                  the art of ghee-making using the ancient Bilona (Valona Paddhati) method. What started as a tradition
+                  in our home kitchen has grown into a mission to bring this liquid gold to every household in India.
+                </p>
+                <p>
+                  We source milk only from indigenous Gir cows and buffaloes that roam freely on natural pastures.
+                  Our ghee contains <strong className="text-gray-900">zero preservatives, zero additives</strong> — just pure, golden goodness
+                  as nature intended.
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link to="/products" className="btn-primary">
+                  Shop Our Ghee <ArrowRight size={17} className="ml-2" />
+                </Link>
+                <Link to="/contact" className="btn-outline">
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
+              <img
+                src="/images/hero-ghee-jar.svg"
+                alt="Vashudha Ghee — Premium Pure Desi Ghee Jar"
+                className="relative rounded-3xl shadow-premium w-full"
+              />
             </div>
           </div>
-          <div>
-            <img 
-              src="/images/hero-ghee.svg" 
-              alt="Traditional ghee making process"
-              className="rounded-lg shadow-xl"
-            />
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-14 bg-primary-500">
+        <div className="container-custom">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
+            {[
+              { value: '10,000+', label: 'Happy Families' },
+              { value: '100%', label: 'Pure & Natural' },
+              { value: '5000+', label: 'Years of Tradition' },
+              { value: 'Zero', label: 'Preservatives' },
+            ].map((stat, i) => (
+              <div key={i}>
+                <div className="text-3xl md:text-4xl font-bold font-heading">{stat.value}</div>
+                <div className="text-amber-100 text-sm mt-1">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Our Values */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Values</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              These core values guide everything we do
+      {/* Bilona Process */}
+      <section className="py-20 bg-gradient-to-br from-amber-50 to-white">
+        <div className="container-custom">
+          <div className="text-center mb-14">
+            <span className="section-badge">⚙️ Traditional Process</span>
+            <h2 className="section-title mb-2">The Bilona Method</h2>
+            <div className="gold-divider"></div>
+            <p className="section-subtitle">
+              Our 4-step ancient Vedic process ensures every jar of Vashudha Ghee is packed with
+              natural nutrients, aroma, and Ayurvedic goodness.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {/* Bilona Process Illustration */}
+          <div className="flex justify-center mb-12">
+            <div className="relative max-w-2xl w-full">
+              <div className="absolute -inset-4 bg-amber-100 rounded-3xl opacity-40 blur-2xl"></div>
+              <img
+                src="/images/bilona-process.svg"
+                alt="Traditional Bilona Churning Process — Ancient Indian Ghee Making Method"
+                className="relative w-full rounded-2xl shadow-premium"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+            {processSteps.map((step) => (
+              <div key={step.step} className="relative text-center p-7 rounded-2xl border border-amber-100 bg-white hover:shadow-premium hover:-translate-y-1 transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary-500 text-white text-xl font-bold mb-5 shadow-gold">
+                  {step.step}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{step.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Values */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-14">
+            <span className="section-badge">💛 Our Values</span>
+            <h2 className="section-title mb-2">What We Stand For</h2>
+            <div className="gold-divider"></div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-7">
             {values.map((value, index) => {
               const Icon = value.icon
               return (
-                <div key={index} className="card p-6 text-center">
-                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="text-primary-600" size={32} />
+                <div key={index} className="card p-7 text-center hover:shadow-premium hover:-translate-y-1 transition-all duration-300 border border-amber-50">
+                  <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <Icon className="text-primary-600" size={28} />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-                  <p className="text-gray-600">{value.description}</p>
+                  <h3 className="text-lg font-semibold mb-3 text-gray-900">{value.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{value.description}</p>
                 </div>
               )
             })}
           </div>
         </div>
+      </section>
 
-        {/* Why Choose Us */}
-        <div className="card p-12 bg-gradient-to-r from-primary-50 to-secondary-50">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              What makes Vashudha Ghee different from others
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">100%</div>
-              <p className="text-lg font-semibold mb-2">Pure & Natural</p>
-              <p className="text-gray-600">No additives or preservatives</p>
+      {/* Quality Promise */}
+      <section className="py-20 bg-gradient-to-br from-amber-50 to-yellow-50">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="section-badge">🏆 Quality Promise</span>
+              <h2 className="section-title mb-2">Our Commitment to You</h2>
+              <div className="gold-divider"></div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">A2</div>
-              <p className="text-lg font-semibold mb-2">Desi Cow Milk</p>
-              <p className="text-gray-600">From grass-fed indigenous cows</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">10K+</div>
-              <p className="text-lg font-semibold mb-2">Happy Customers</p>
-              <p className="text-gray-600">Trusted by families nationwide</p>
+            <div className="grid md:grid-cols-2 gap-5">
+              {[
+                'Sourced only from indigenous A2 Gir cows & healthy buffaloes',
+                'Every batch hand-churned using traditional wooden Bilona',
+                'Slow-cooked on low flame to preserve all nutrients',
+                'FSSAI certified facility with regular quality audits',
+                'Lab-tested for purity — every single batch',
+                'No preservatives, no artificial colors, no additives — ever',
+                'Packaged in food-grade, airtight containers',
+                '12-month natural shelf life without any chemical treatment',
+              ].map((point, i) => (
+                <div key={i} className="flex items-start gap-3 bg-white rounded-xl p-4 shadow-soft">
+                  <CheckCircle size={18} className="text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-700 text-sm">{point}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Mission & Vision */}
-        <div className="grid md:grid-cols-2 gap-8 mt-16">
-          <div className="card p-8">
-            <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-            <p className="text-gray-700">
-              To provide every household with access to pure, traditional ghee made 
-              using authentic methods, while supporting local farmers and preserving 
-              ancient wisdom of Ayurveda.
-            </p>
-          </div>
-          <div className="card p-8">
-            <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
-            <p className="text-gray-700">
-              To become the most trusted name in traditional ghee products across India 
-              and beyond, setting new standards for quality, purity, and customer satisfaction.
-            </p>
+      {/* Farm to Kitchen */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <div className="relative order-2 lg:order-1">
+              <div className="absolute -inset-4 bg-green-100 rounded-3xl opacity-40 blur-2xl"></div>
+              <img
+                src="/images/desi-cow.svg"
+                alt="Gir Cow - Source of A2 Milk for Vashudha Ghee"
+                className="relative rounded-3xl shadow-premium w-full"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="section-badge">🌾 Farm to Kitchen</span>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-6">
+                From Our Farm, Directly to Your Table
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                We believe transparency is the foundation of trust. Our entire supply chain —
+                from the cow to your kitchen — is short, traceable, and ethical. No middlemen,
+                no compromise, no shortcuts.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  { icon: Leaf, text: 'Indigenous Gir cows grazing freely on natural pastures' },
+                  { icon: Heart, text: 'Ethical, stress-free environment for our animals' },
+                  { icon: Award, text: 'Milk collected only once daily — never over-milked' },
+                  { icon: CheckCircle, text: 'Direct from farm to your doorstep — no cold chain breaks' },
+                ].map(({ icon: Icon, text }, i) => (
+                  <li key={i} className="flex items-center gap-3 text-gray-700">
+                    <span className="flex-shrink-0 w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center">
+                      <Icon size={16} className="text-primary-600" />
+                    </span>
+                    <span className="text-sm">{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-16 bg-gradient-to-br from-amber-50 to-yellow-50">
+        <div className="container-custom">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-2xl p-8 shadow-soft border border-amber-100">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-5">
+                <span className="text-2xl">🎯</span>
+              </div>
+              <h2 className="text-2xl font-bold font-heading text-gray-900 mb-4">Our Mission</h2>
+              <p className="text-gray-600 leading-relaxed">
+                To provide every household with access to pure, traditional ghee made using authentic
+                Bilona methods — while supporting local farmers, respecting animal welfare, and preserving
+                the ancient wisdom of Ayurveda.
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl p-8 shadow-soft border border-amber-100">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-5">
+                <span className="text-2xl">🌟</span>
+              </div>
+              <h2 className="text-2xl font-bold font-heading text-gray-900 mb-4">Our Vision</h2>
+              <p className="text-gray-600 leading-relaxed">
+                To become the most trusted name in traditional ghee products across India and the world —
+                setting new standards for purity, quality, and authenticity, while making healthy eating
+                a way of life for every family.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   )
 }

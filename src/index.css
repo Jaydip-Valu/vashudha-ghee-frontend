@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-cream-50 text-gray-900 antialiased;
+    background-color: #fffdf5;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -18,11 +21,11 @@
   }
 
   .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply px-5 py-2.5 rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center;
   }
 
   .btn-primary {
-    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 shadow-gold hover:shadow-premium;
   }
 
   .btn-secondary {
@@ -30,20 +33,64 @@
   }
 
   .btn-outline {
+    @apply btn border-2 border-primary-500 text-primary-600 hover:bg-primary-50;
+  }
+
+  .btn-ghost {
     @apply btn border-2 border-gray-300 text-gray-700 hover:bg-gray-50;
   }
 
   .input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-4 py-2.5 border border-amber-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-soft overflow-hidden;
+    @apply bg-white rounded-2xl shadow-soft overflow-hidden;
+  }
+
+  .section-badge {
+    @apply inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold font-heading text-gray-900;
+  }
+
+  .section-subtitle {
+    @apply text-gray-500 mt-3 max-w-2xl mx-auto text-lg;
+  }
+
+  .gold-divider {
+    @apply w-16 h-1 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full mx-auto mt-4 mb-2;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .bg-cream {
+    background-color: #fffdf5;
+  }
+
+  .bg-cream-warm {
+    background-color: #fff9e6;
+  }
+
+  .text-gold {
+    color: #d4a017;
+  }
+
+  .border-gold {
+    border-color: #d4a017;
+  }
+
+  .gradient-gold {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+  }
+
+  .gradient-cream {
+    background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 50%, #fef3c7 100%);
   }
 }

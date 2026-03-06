@@ -63,28 +63,32 @@ const Products = () => {
         }}
       />
       
-      <div className="container-custom py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold font-heading mb-2">
-            Our Products
+      <section className="bg-gradient-to-br from-amber-50 via-cream-50 to-yellow-50 py-12 border-b border-amber-100">
+        <div className="container-custom">
+          <span className="section-badge">🛒 Our Collection</span>
+          <h1 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-2">
+            Shop Pure Desi Ghee
           </h1>
-          <p className="text-gray-600 mb-4">
-            Discover our premium collection of pure desi ghee
+          <div className="w-14 h-1 bg-primary-500 rounded-full mb-4"></div>
+          <p className="text-gray-600 mb-5 max-w-2xl">
+            Discover our premium collection of 100% pure A2 Cow Ghee and Buffalo Bilona Ghee —
+            made using traditional Valona Paddhati. Free delivery on orders above ₹500.
           </p>
           {/* SEO Content Paragraph */}
-          <div className="bg-amber-50 border border-amber-100 rounded-xl p-5 text-sm text-gray-700 leading-relaxed max-w-4xl">
+          <div className="bg-white border border-amber-100 rounded-xl p-5 text-sm text-gray-600 leading-relaxed max-w-4xl shadow-soft">
             <p>
               Welcome to Vashudha Ghee — your trusted source for <strong>100% pure A2 Desi Cow Ghee</strong> and{' '}
               <strong>Buffalo Bilona Ghee</strong> made using the ancient <strong>Valona Paddhati (Bilona Method)</strong>.
               Every jar is handcrafted from the milk of free-roaming, grass-fed indigenous cows and buffaloes.
               We never add preservatives, chemicals, or artificial colors. Each batch is lab-tested for purity before it reaches your table.
               Whether you are looking for <em>Organic Ghee Online India</em>, <em>A2 Desi Cow Ghee</em>, or
-              traditional <em>Pure Buffalo Ghee</em> — you have come to the right place. Free delivery on orders above ₹500.
+              traditional <em>Pure Buffalo Ghee</em> — you have come to the right place.
             </p>
           </div>
         </div>
+      </section>
 
+      <div className="container-custom py-8">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
